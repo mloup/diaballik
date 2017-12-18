@@ -40,10 +40,7 @@ namespace Diaballik
 
         /// <param name="piece1">Piece où était la balle</param>
         /// <param name="piece2">Pièce où va la balle</param>
-        public void moveBall(Diaballik.Piece piece1, Diaballik.Piece piece2)
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void moveBall(Diaballik.Piece piece1, Diaballik.Piece piece2);
 
         public void movePiece(Diaballik.Piece Piece, int x, int y)
         {

@@ -11,7 +11,7 @@ namespace Diaballik
         private int nY;
         private int pX;
         private int pY;
-        private int p;
+        private Piece p;
 
         public MovePiece(int x1, int y1, int x2, int y2)
         {
@@ -55,7 +55,7 @@ namespace Diaballik
             }
         }
 
-        public int piece
+        public Piece piece
         {
             get => default(int);
             set

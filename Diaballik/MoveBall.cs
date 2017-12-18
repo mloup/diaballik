@@ -37,13 +37,5 @@ namespace Diaballik
                 nP = value;
             }
         }
-
-        public int piece
-        {
-            get => default(int);
-            set
-            {
-            }
-        }
     }
 }

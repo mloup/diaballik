@@ -83,14 +83,14 @@
   <Class Name="Diaballik.Piece">
     <Position X="8.25" Y="10.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAAAAAAAIAAAAAAABAAAAAAEAAAAAAAAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAAgAIAAAAAAABAAAAAIEAAACAAAAA=</HashCode>
       <FileName>Piece.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Diaballik.MovePiece">
     <Position X="22.25" Y="14.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAAQQAAEEAAAAAAAAAAAAgCAAAIAAAAAAAA=</HashCode>
+      <HashCode>AACAAAAAAAAQQAAEEAAAAAAAAAAAAgCgAEIAAAAAAAA=</HashCode>
       <FileName>MovePiece.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,18 +129,18 @@
       <FileName>Actions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diaballik.Command">
-    <Position X="25" Y="12.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAEAAAAAAAAAAEAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
-      <FileName>Command.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Diaballik.PieceFactory">
     <Position X="8.25" Y="7.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>PieceFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.Command">
+    <Position X="25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAAAAAAAAAAEAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Command.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
