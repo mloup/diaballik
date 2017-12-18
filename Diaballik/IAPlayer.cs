@@ -10,29 +10,30 @@ namespace Diaballik
         private IAStrategy iastrat;
         private int wichpiecehasball;
 
-        public IAPlayer(string name, string color, Diaballik.IAStrategy strat)
+        public IAPlayer(string name, string color, Diaballik.IAStrategy strat): base (name, color)
         {
             throw new System.NotImplementedException();
         }
 
         ~IAPlayer()
         {
-            throw new System.NotImplementedException();
         }
 
         public IAStrategy IAStrategy
         {
-            get => default(IAStrategy);
+            get => iastrat;
             set
             {
+                iastrat = value;
             }
         }
 
         public int wichPieceHasBall
         {
-            get => default(int);
+            get => wichpiecehasball;
             set
             {
+                wichpiecehasball = value;
             }
         }
     }

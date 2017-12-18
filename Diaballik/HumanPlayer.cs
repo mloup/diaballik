@@ -7,14 +7,12 @@ namespace Diaballik
 {
     public class HumanPlayer : Player
     {
-        public HumanPlayer(string name, string colour)
+        public HumanPlayer(string name, string colour) : base (name, colour)
         {
-            throw new System.NotImplementedException();
         }
 
         ~HumanPlayer()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

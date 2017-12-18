@@ -51,6 +51,7 @@
     <Compile Include="PieceFrabriqueTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PieceTest.cs" />
+    <Compile Include="PlayerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

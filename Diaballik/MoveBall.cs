@@ -38,22 +38,22 @@ namespace Diaballik
             }
         }
 
-        public void Do()
+        public override void Do()
         {
 
         }
 
-        public bool CanDo()
+        public override bool CanDo()
         {
             return false;
         }
 
-        public void Redo()
+        public override void Redo()
         {
 
         }
 
-        public void Undo()
+        public override void Undo()
         {
 
         }

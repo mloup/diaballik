@@ -11,6 +11,13 @@ namespace Diaballik
         private string name;
         private Piece[] pieces;
 
+        public Player(string n, string col)
+        {
+            Color = col;
+            Name = n;
+
+        }
+
         public string Color
         {
             get => color;
@@ -40,11 +47,16 @@ namespace Diaballik
 
         /// <param name="piece1">Piece où était la balle</param>
         /// <param name="piece2">Pièce où va la balle</param>
-        public abstract void moveBall(Diaballik.Piece piece1, Diaballik.Piece piece2);
+        public void moveBall(Diaballik.Piece piece1, Diaballik.Piece piece2)
+        {
+            piece1.carryBall = false;
+            piece2.carryBall = true;
+        }
 
         public void movePiece(Diaballik.Piece Piece, int x, int y)
         {
-            throw new System.NotImplementedException();
+            Piece.coordX = x;
+            Piece.coordY = y;
         }
     }
 }

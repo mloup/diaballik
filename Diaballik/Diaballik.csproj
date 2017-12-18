@@ -61,7 +61,6 @@
     <Compile Include="SaveGameData.cs" />
     <Compile Include="StandardBuilder.cs" />
     <Compile Include="StartingStrategy.cs" />
-    <Compile Include="Undoable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
