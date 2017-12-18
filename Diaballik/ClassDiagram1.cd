@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Diaballik.Game">
+    <Position X="13.5" Y="7.25" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>CAAIAAAAIACCgGAAAAQAAAAEARwgAgCBIAEAAQAgAAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.StandardBuilder">
+    <Position X="1.25" Y="5.25" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StandardBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.EnemyAmongUsBuilder">
+    <Position X="7.75" Y="5.25" Width="6" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EnemyAmongUsBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.SavedGameBuilder">
+    <Position X="21" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>SavedGameBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.HumanPlayer">
+    <Position X="8.25" Y="17" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HumanPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.IAPlayer">
+    <Position X="4.25" Y="17" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAABAAAAAAAAQAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>IAPlayer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IAStrategy" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Diaballik.Player">
+    <Position X="5.25" Y="13.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAQAAAgEAACgAAAAoAAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.IAStrategy">
+    <Position X="2.75" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IAStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.NoobStrategy">
+    <Position X="0.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NoobStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.StartingStrategy">
+    <Position X="2.75" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StartingStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.ProgressiveStrategy">
+    <Position X="5.25" Y="9.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProgressiveStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.Piece">
+    <Position X="8.25" Y="10.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAIAAAAAAABAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Piece.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.MovePiece">
+    <Position X="22.25" Y="14.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAQQAAEEAAAAAAAAAAAAgCAAAIAAAAAAAA=</HashCode>
+      <FileName>MovePiece.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.MoveBall">
+    <Position X="25.75" Y="16" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAQQAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>MoveBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.SaveGameData">
+    <Position X="12.25" Y="14.5" Width="9.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIBAAIIABACAAAAKAAAAAADGAAACABABAAQQAAAA=</HashCode>
+      <FileName>SaveGameData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.BuilderGame">
+    <Position X="11.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIBAAAAAQAIAAAACAABAAAAgAAACgAQAAgAAAAAA=</HashCode>
+      <FileName>BuilderGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.BallRandomBuilder">
+    <Position X="14.5" Y="5.25" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BallRandomBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.Actions">
+    <Position X="21.75" Y="9.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAIAAAAQAAAAAAAAIAAgAAAg=</HashCode>
+      <FileName>Actions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.Command">
+    <Position X="25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAAAAAAAAAAEAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Command.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Diaballik.PieceFactory">
+    <Position X="8.25" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>PieceFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
