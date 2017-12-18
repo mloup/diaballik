@@ -25,42 +25,67 @@ namespace Diaballik
 
         public int prevX
         {
-            get => default(int);
+            get => pX;
             set
             {
+                pX = value;
             }
         }
 
         public int prevY
         {
-            get => default(int);
+            get => pY;
             set
             {
+                pY = value;
             }
         }
 
         public int nextX
         {
-            get => default(int);
+            get => nX;
             set
             {
+                nX = value;
             }
         }
 
         public int nextY
         {
-            get => default(int);
+            get => nY;
             set
             {
+                nY = value;
             }
         }
 
         public Piece piece
         {
-            get => default(int);
+            get => p;
             set
             {
+                p = value;
             }
+        }
+
+        public override void Do()
+        {
+
+        }
+
+        public override bool CanDo()
+        {
+            return false;
+        }
+
+        public override void Redo()
+        {
+
+        }
+
+        public override void Undo()
+        {
+
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Diaballik
 {
     public class Game
     {
+        public static Game INSTANCE = new Game();
         private int currplayer;
         private int nbactions;
         private int nbcaseboard;
@@ -14,6 +15,11 @@ namespace Diaballik
         private bool finished;
         private bool gamehasia;
         private Diaballik.Player[] players;
+
+        public Game()
+        {
+            throw new System.NotImplementedException();
+        }
 
         public Game(Diaballik.Player[] Players, bool HasIA)
         {

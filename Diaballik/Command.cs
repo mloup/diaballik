@@ -7,12 +7,12 @@ namespace Diaballik
 {
     public abstract class Command
     {
-        public abstract void @do();
+        public abstract void Do();
 
-        public abstract bool canDo();
+        public abstract bool CanDo();
 
-        public abstract void redo();
+        public abstract void Redo();
 
-        public abstract void undo();
+        public abstract void Undo();
     }
 }

@@ -37,5 +37,25 @@ namespace Diaballik
                 nP = value;
             }
         }
+
+        public void Do()
+        {
+
+        }
+
+        public bool CanDo()
+        {
+            return false;
+        }
+
+        public void Redo()
+        {
+
+        }
+
+        public void Undo()
+        {
+
+        }
     }
 }
