@@ -15,7 +15,7 @@ namespace DiaballikTest
             p1.carryBall = true;
             Piece[] array = { p1, p2 };
 
-            Player p = new HumanPlayer("name", "red");
+            Player p = new HumanPlayer("name", "red",1, 2);
             p.moveBall(p1, p2);
 
             Assert.IsTrue(p2.carryBall);
@@ -24,12 +24,11 @@ namespace DiaballikTest
         [TestMethod]
         public void TestMovePiece()
         {
-            Piece p1 = new Piece(1);
-            Player p = new HumanPlayer("name", "red");
-            p.movePiece(p1, 1, 2);
+            Player p = new HumanPlayer("name", "red", 1, 2);
+            p.movePiece(p.Pieces[0], 1, 2);
 
-            Assert.IsTrue(p1.coordX==1);
-            Assert.IsTrue(p1.coordY == 2);
+            Assert.IsTrue(p.Pieces[0].coordX==1);
+            Assert.IsTrue(p.Pieces[0].coordY == 2);
         }
     }
 }
