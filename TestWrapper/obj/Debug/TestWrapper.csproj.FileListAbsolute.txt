@@ -1,0 +1,14 @@
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\bin\Debug\libCPP.dll
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\bin\Debug\TestWrapper.exe.config
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\bin\Debug\TestWrapper.exe
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\bin\Debug\TestWrapper.pdb
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\bin\Debug\ModelEtudiant.dll
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\bin\Debug\ModelEtudiant.pdb
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\obj\Debug\TestWrapper.csprojResolveAssemblyReference.cache
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\obj\Debug\TestWrapper.csproj.CoreCompileInputs.cache
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\obj\Debug\TestWrapper.exe
+C:\Users\Pierre\Documents\CppLibProjetEtudiant\TestWrapper\obj\Debug\TestWrapper.pdb
+C:\Users\Pierre\Documents\diaballik\TestWrapper\obj\Debug\TestWrapper.csprojResolveAssemblyReference.cache
+C:\Users\Pierre\Documents\diaballik\TestWrapper\obj\Debug\TestWrapper.csproj.CoreCompileInputs.cache
+C:\Users\Pierre\Documents\diaballik\TestWrapper\obj\Debug\TestWrapper.exe
+C:\Users\Pierre\Documents\diaballik\TestWrapper\obj\Debug\TestWrapper.pdb
