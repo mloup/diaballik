@@ -18,7 +18,13 @@ namespace Diaballik
 
         public Game()
         {
-            throw new System.NotImplementedException();
+            Random random = new Random();
+            currentPlayer = random.Next(0, 2);
+            nbActions = 0;
+            nbCaseBoard = 0;
+            endTurnClicked = false;
+            finished = false;
+            gamehasia = false;
         }
 
         public Game(Diaballik.Player[] Players, bool HasIA)
@@ -34,6 +40,11 @@ namespace Diaballik
         ~Game()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void setINSTANCE(Game inst)
+        {
+            INSTANCE = inst;
         }
 
         public Diaballik.Player[] Players

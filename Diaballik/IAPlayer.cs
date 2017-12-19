@@ -10,7 +10,7 @@ namespace Diaballik
         private IAStrategy iastrat;
         private int wichpiecehasball;
 
-        public IAPlayer(string name, string color, Diaballik.IAStrategy strat): base (name, color)
+        public IAPlayer(string name, string color, int nBTiles, Diaballik.IAStrategy strat): base (name, color, 2, nBTiles)
         {
             throw new System.NotImplementedException();
         }

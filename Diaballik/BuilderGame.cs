@@ -11,6 +11,7 @@ namespace Diaballik
         private string name2;
         private string color1;
         private string color2;
+        private IAStrategy strat;
         private bool hasIA;
 
         public string Name1
@@ -58,24 +59,46 @@ namespace Diaballik
             }
         }
 
+        public IAStrategy Strat
+        {
+            get => strat;
+            set
+            {
+                strat = value;
+            }
+        }
+
         public void createGame()
         {
-            throw new System.NotImplementedException();
+            Game.INSTANCE.Players[0]= createPlayer(Name1, Color1);
+            if (HasIA)
+            {
+                Game.INSTANCE.Players[1] = createIAPlayer();
+                Game.INSTANCE.gameHasIA = true;
+            }
+            else
+            {
+                Game.INSTANCE.Players[1] = createPlayer(Name2, Color2);
+            }
+
+            int[] coord = ComputePiecesCoordinates();
+
+
+
         }
 
-        public void createPlayer()
+        public HumanPlayer createPlayer(string n, string c)
         {
-            throw new System.NotImplementedException();
+            return new HumanPlayer(n, c);
         }
 
-        public void PlacePieces()
+        public IAPlayer createIAPlayer()
         {
-            throw new System.NotImplementedException();
+            return new IAPlayer(Name2, Color2, Strat);
         }
 
-        public int[] ComputePiecesCoordinates()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void PlacePieces(int[] coord);
+
+        public abstract int[] ComputePiecesCoordinates();
     }
 }

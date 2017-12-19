@@ -11,11 +11,11 @@ namespace Diaballik
         private string name;
         private Piece[] pieces;
 
-        public Player(string n, string col)
+        public Player(string n, string col, int nJoueur, int nBTiles)
         {
             Color = col;
             Name = n;
-
+            pieces = PieceFactory.INSTANCE.CreateNPieces(nBTiles, nJoueur);
         }
 
         public string Color
