@@ -7,11 +7,17 @@ namespace TestWrapper
     {
         static void Main(string[] args)
         {
-            var algo = new NoobStrategy();
-            var res = algo.playOneAction();
-            foreach (var tile in res.Tiles)
-                Console.WriteLine(tile); 
-            Console.ReadLine();
+            try
+            {
+                var algo = new NoobStrategy();
+                var res = algo.PlayOneAction();
+                Console.WriteLine(res);
+                Console.ReadLine();
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine("exception !");
+            }
         }
     }
 }

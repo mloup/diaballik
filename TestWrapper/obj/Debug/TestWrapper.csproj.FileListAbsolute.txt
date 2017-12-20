@@ -12,3 +12,9 @@ C:\Users\Pierre\Documents\diaballik\TestWrapper\obj\Debug\TestWrapper.csprojReso
 C:\Users\Pierre\Documents\diaballik\TestWrapper\obj\Debug\TestWrapper.csproj.CoreCompileInputs.cache
 C:\Users\Pierre\Documents\diaballik\TestWrapper\obj\Debug\TestWrapper.exe
 C:\Users\Pierre\Documents\diaballik\TestWrapper\obj\Debug\TestWrapper.pdb
+C:\Users\Pierre\Documents\diaballik\TestWrapper\bin\Debug\libCPP.dll
+C:\Users\Pierre\Documents\diaballik\TestWrapper\bin\Debug\Diaballik.dll
+C:\Users\Pierre\Documents\diaballik\TestWrapper\bin\Debug\Diaballik.pdb
+C:\Users\Pierre\Documents\diaballik\TestWrapper\bin\Debug\TestWrapper.exe.config
+C:\Users\Pierre\Documents\diaballik\TestWrapper\bin\Debug\TestWrapper.exe
+C:\Users\Pierre\Documents\diaballik\TestWrapper\bin\Debug\TestWrapper.pdb

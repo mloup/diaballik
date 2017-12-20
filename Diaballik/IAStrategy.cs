@@ -10,9 +10,16 @@ namespace Diaballik
         /// <summary>
         /// L'IA joue une action, qui peut être de passer son tour
         /// </summary>
-        public void playOneAction()
+        public Action PlayOneAction()
         {
             throw new System.NotImplementedException();
         }
+
+        public enum Action
+        {
+            MovePiece = 0,
+            MoveBall = 1,
+            DoNothing = 2
+        };
     }
 }

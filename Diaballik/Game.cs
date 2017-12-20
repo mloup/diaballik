@@ -14,7 +14,7 @@ namespace Diaballik
         private bool endturnclicked;
         private bool finished;
         private bool gamehasia;
-        private Diaballik.Player[] players;
+        private Diaballik.Player[] players = new Player[2];
 
         public Game()
         {
@@ -25,6 +25,8 @@ namespace Diaballik
             endTurnClicked = false;
             finished = false;
             gamehasia = false;
+            players[0] = new HumanPlayer("Marie", "bleu", 0, 7);
+            players[1] = new HumanPlayer("Pierre", "vert", 1, 7);
         }
 
         public Game(Diaballik.Player[] Players, bool HasIA)

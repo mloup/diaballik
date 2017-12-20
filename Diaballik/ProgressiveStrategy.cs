@@ -7,7 +7,7 @@ namespace Diaballik
 {
     public class ProgressiveStrategy : IAStrategy
     {
-        private int nbtour;
+        //private int nbtour;
 
         public ProgressiveStrategy()
         {
