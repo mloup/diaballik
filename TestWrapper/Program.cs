@@ -14,7 +14,7 @@ namespace TestWrapper
                 Console.WriteLine(res);
                 Console.ReadLine();
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 Console.WriteLine("exception !");
             }

@@ -9,13 +9,11 @@ namespace Diaballik
     {
         private string color;
         private string name;
-        private Piece[] pieces;
 
         public Player(string n, string col, int nJoueur, int nBTiles)
         {
             Color = col;
             Name = n;
-            pieces = PieceFactory.INSTANCE.CreateNPieces(nBTiles, nJoueur);
         }
 
         public string Color
@@ -36,18 +34,9 @@ namespace Diaballik
             }
         }
 
-        public Diaballik.Piece[] Pieces
-        {
-            get => pieces;
-            set
-            {
-                pieces = value;
-            }
-        }
-
         /// <param name="piece1">Piece où était la balle</param>
         /// <param name="piece2">Pièce où va la balle</param>
-        public void moveBall(Diaballik.Piece piece1, Diaballik.Piece piece2)
+        /*public void moveBall(Diaballik.Piece piece1, Diaballik.Piece piece2)
         {
             piece1.carryBall = false;
             piece2.carryBall = true;
@@ -57,6 +46,6 @@ namespace Diaballik
         {
             Piece.coordX = x;
             Piece.coordY = y;
-        }
+        }*/
     }
 }

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Actions.cs" />
     <Compile Include="BallRandomBuilder.cs" />
+    <Compile Include="Board.cs" />
     <Compile Include="BuilderGame.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="EnemyAmongUsBuilder.cs" />

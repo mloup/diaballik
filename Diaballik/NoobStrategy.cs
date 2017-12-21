@@ -8,6 +8,15 @@ namespace Diaballik
 {
     public class NoobStrategy : IAStrategy
     {
+
+        public enum Action
+        {   
+            Default = -1,
+            MovePiece = 0,
+            MoveBall = 1,
+            DoNothing = 2
+        };
+
         IntPtr algoPtr;
         bool disposed = false ;
 
@@ -24,7 +33,7 @@ namespace Diaballik
 
         new public Action PlayOneAction()
         {
-            try
+            /*try
             {
                 Piece[] pieces0, pieces1;
                 int nbPiece;
@@ -65,16 +74,19 @@ namespace Diaballik
                 Console.WriteLine("zone5");
                 Algo_doActionNoobStrategy(algoPtr, piecesPlayer0, piecesPlayer1, ballPlayer0, ballPlayer1, returnedMove, returnedAttr);
                 return returnedMove[0];
-            } catch (System.NullReferenceException e)
+            } catch (System.NullReferenceException)
             {
                 Console.WriteLine("exception1 !");
                 return Action.DoNothing;
-            } catch (System.TypeInitializationException e)
+            } catch (System.TypeInitializationException)
             {
                 Console.WriteLine("exception2 !");
                 return Action.DoNothing;
-            }
-            
+            }*/
+            Action returnedMove = Action.Default;
+            int[] returnedAttr = new int[4];
+            Algo_doActionNoobStrategy(algoPtr, Game.INSTANCE.Board.Tiles.Cast<int[]>().ToArray(), returnedMove, returnedAttr);
+            return returnedMove;
         }
 
         public void Dispose()
@@ -97,7 +109,7 @@ namespace Diaballik
 
 
         [DllImport("libCPP.dll", CallingConvention = CallingConvention.Cdecl)]
-        extern static void Algo_doActionNoobStrategy(IntPtr algoPtr, int[] piecesPlayer0, int[] piecesPlayer1, int[] ballPlayer0, int[] ballPlayer1, IAStrategy.Action[] returnedMove, int[] returnedAttr);
+        extern static void Algo_doActionNoobStrategy(IntPtr algoPtr, int[][] tiles, Action returnedMove, int[] returnedAttr);
 
         [DllImport("libCPP.dll", CallingConvention = CallingConvention.Cdecl)]
         extern static IntPtr Algo_new();

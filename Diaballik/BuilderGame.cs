@@ -106,7 +106,7 @@ namespace Diaballik
             if (HasIA)
             {
                 Game.INSTANCE.Players[1] = createIAPlayer();
-                Game.INSTANCE.gameHasIA = true;
+                Game.INSTANCE.GameHasIA = true;
             }
             else
             {

@@ -15,18 +15,20 @@ namespace Diaballik
         private bool finished;
         private bool gamehasia;
         private Diaballik.Player[] players = new Player[2];
+        private Board board;
 
         public Game()
         {
             Random random = new Random();
-            currentPlayer = random.Next(0, 2);
+            CurrentPlayer = random.Next(0, 2);
             nbActions = 0;
             nbCaseBoard = 0;
-            endTurnClicked = false;
+            EndTurnClicked = false;
             finished = false;
             gamehasia = false;
             players[0] = new HumanPlayer("Marie", "bleu", 0, 7);
             players[1] = new HumanPlayer("Pierre", "vert", 1, 7);
+            board = new Board();
         }
 
         public Game(Diaballik.Player[] Players, bool HasIA)
@@ -58,7 +60,7 @@ namespace Diaballik
             }
         }
 
-        public int currentPlayer
+        public int CurrentPlayer
         {
             get => currplayer;
             set
@@ -86,7 +88,7 @@ namespace Diaballik
             }
         }
 
-        public bool gameHasIA
+        public bool GameHasIA
         {
             get => gamehasia;
             set
@@ -95,7 +97,7 @@ namespace Diaballik
             }
         }
 
-        public bool endTurnClicked
+        public bool EndTurnClicked
         {
             get => endturnclicked;
             set
@@ -110,6 +112,15 @@ namespace Diaballik
             set
             {
                 nbcaseboard = value;
+            }
+        }
+
+        public Board Board
+        {
+            get => board;
+            set
+            {
+                board = value;
             }
         }
 
@@ -191,6 +202,6 @@ namespace Diaballik
         public void UserEndTurn()
         {
             throw new System.NotImplementedException();
-        }
+        }        
     }
 }

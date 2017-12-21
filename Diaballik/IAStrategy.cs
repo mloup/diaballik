@@ -7,6 +7,7 @@ namespace Diaballik
 {
     public abstract class IAStrategy
     {
+
         /// <summary>
         /// L'IA joue une action, qui peut être de passer son tour
         /// </summary>
@@ -14,12 +15,5 @@ namespace Diaballik
         {
             throw new System.NotImplementedException();
         }
-
-        public enum Action
-        {
-            MovePiece = 0,
-            MoveBall = 1,
-            DoNothing = 2
-        };
     }
 }
