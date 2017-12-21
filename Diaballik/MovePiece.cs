@@ -11,7 +11,6 @@ namespace Diaballik
         private int nY;
         private int pX;
         private int pY;
-        private Piece p;
 
         public MovePiece(int x1, int y1, int x2, int y2)
         {
@@ -59,15 +58,6 @@ namespace Diaballik
             }
         }
 
-        public Piece piece
-        {
-            get => p;
-            set
-            {
-                p = value;
-            }
-        }
-
         public override void Do()
         {
 
@@ -80,7 +70,7 @@ namespace Diaballik
 
         public override void Redo()
         {
-
+            Do();
         }
 
         public override void Undo()

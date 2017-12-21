@@ -3,7 +3,11 @@
   <Class Name="Diaballik.Game">
     <Position X="14.25" Y="7.25" Width="5.25" />
     <TypeIdentifier>
+<<<<<<< HEAD
       <HashCode>CAAAAAAAIACCgGAAAAQAAAAEARwgAgABIAAAgWAhCAA=</HashCode>
+=======
+      <HashCode>CAAIAAAAIACCgGAAAAQAAAAEARwgAgCBIAEAAUAgAAA=</HashCode>
+>>>>>>> 73ca3342d9da45f41a8b9c7ab2ec9fb18fb74d97
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -53,10 +57,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Diaballik.IAStrategy">
+<<<<<<< HEAD
     <Position X="2.75" Y="7.75" Width="2" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
+=======
+    <Position X="2.75" Y="7.5" Width="2" />
+    <NestedTypes>
+      <Enum Name="Diaballik.IAStrategy.Action" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>IAStrategy.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+>>>>>>> 73ca3342d9da45f41a8b9c7ab2ec9fb18fb74d97
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IAStrategy.cs</FileName>
@@ -64,6 +79,7 @@
   </Class>
   <Class Name="Diaballik.NoobStrategy">
     <Position X="0.5" Y="9.25" Width="1.5" />
+<<<<<<< HEAD
     <NestedTypes>
       <Enum Name="Diaballik.NoobStrategy.Action" Collapsed="true">
         <TypeIdentifier>
@@ -71,6 +87,8 @@
         </TypeIdentifier>
       </Enum>
     </NestedTypes>
+=======
+>>>>>>> 73ca3342d9da45f41a8b9c7ab2ec9fb18fb74d97
     <TypeIdentifier>
       <HashCode>gAIAAAAAACAAAAAAAAAIAAAAIAAAAAAAAAAAAAIAQAA=</HashCode>
       <FileName>NoobStrategy.cs</FileName>
@@ -93,7 +111,7 @@
   <Class Name="Diaballik.Piece">
     <Position X="28.75" Y="7.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAAAAAgAIAAAAAAABAAAAAIEAAACAAAAA=</HashCode>
+      <HashCode>AABAAAAQAAAAEAAAgAIAAAAAAABAAAAAIEAAACAAAAA=</HashCode>
       <FileName>Piece.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -121,7 +139,11 @@
   <Class Name="Diaballik.BuilderGame">
     <Position X="11.25" Y="0.5" Width="2.5" />
     <TypeIdentifier>
+<<<<<<< HEAD
       <HashCode>EAgCIBAAAAAQAIEAAACBABAAAAgQAACgAQAAgQAAAAE=</HashCode>
+=======
+      <HashCode>AAgAIBEAAAAQAIEAAACDABAAAAgQAACgAAAAgQAAAAE=</HashCode>
+>>>>>>> 73ca3342d9da45f41a8b9c7ab2ec9fb18fb74d97
       <FileName>BuilderGame.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -153,11 +175,19 @@
       <FileName>Command.cs</FileName>
     </TypeIdentifier>
   </Class>
+<<<<<<< HEAD
   <Class Name="Diaballik.Board">
     <Position X="11.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAgAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Board.cs</FileName>
+=======
+  <Class Name="Diaballik.SelectPiece">
+    <Position X="29" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAABCAAQAAAgAAAAAgAAAAA=</HashCode>
+      <FileName>SelectPiece.cs</FileName>
+>>>>>>> 73ca3342d9da45f41a8b9c7ab2ec9fb18fb74d97
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

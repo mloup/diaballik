@@ -7,10 +7,12 @@ namespace Diaballik
 {
     public class MoveBall : Command
     {
-        private Piece nP;
-        private Piece pP;
+        private int nX;
+        private int nY;
+        private int pX;
+        private int pY;
 
-        public MoveBall(Diaballik.Piece piecePrec, Piece pieceNex)
+        public MoveBall(int x1, int y1, int x2, int y2)
         {
             throw new System.NotImplementedException();
         }
@@ -20,23 +22,43 @@ namespace Diaballik
             throw new System.NotImplementedException();
         }
 
-        public Piece PrevPiece
+        public int prevX
         {
-            get => pP;
+            get => pX;
             set
             {
-                pP = value;
+                pX = value;
             }
         }
 
-        public Piece NextPiece
+        public int prevY
         {
-            get => nP;
+            get => pY;
             set
             {
-                nP = value;
+                pY = value;
             }
         }
+
+        public int nextX
+        {
+            get => nX;
+            set
+            {
+                nX = value;
+            }
+        }
+
+        public int nextY
+        {
+            get => nY;
+            set
+            {
+                nY = value;
+            }
+        }
+
+
 
         public override void Do()
         {
@@ -50,7 +72,7 @@ namespace Diaballik
 
         public override void Redo()
         {
-
+            Do();
         }
 
         public override void Undo()

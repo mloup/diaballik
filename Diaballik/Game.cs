@@ -46,6 +46,7 @@ namespace Diaballik
             throw new System.NotImplementedException();
         }
 
+
         public void setINSTANCE(Game inst)
         {
             INSTANCE = inst;
@@ -122,6 +123,11 @@ namespace Diaballik
             {
                 board = value;
             }
+        }
+
+        public void run()
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>

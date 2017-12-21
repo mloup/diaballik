@@ -11,10 +11,12 @@ namespace Diaballik
         private int cX;
         private int cY;
         private int joueur;
+        private Boolean isSelected;
 
         public Piece(int joueur)
         {
             carryBall = false;
+            IsSelected = false;
             cX = -1;
             cY = -1;
         }
@@ -29,6 +31,15 @@ namespace Diaballik
             set
             {
                 carryball = value;
+            }
+        }
+
+        public Boolean IsSelected
+        {
+            get => isSelected;
+            set
+            {
+                isSelected = value;
             }
         }
 
