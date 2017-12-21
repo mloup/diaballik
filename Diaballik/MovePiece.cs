@@ -13,7 +13,7 @@ namespace Diaballik
         private int pY;
         private Piece p;
 
-        public MovePiece(int x1, int y1, int x2, int y2)
+        public MovePiece(Piece p1, int x2, int y2)
         {
             throw new System.NotImplementedException();
         }

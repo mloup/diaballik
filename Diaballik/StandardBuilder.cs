@@ -26,18 +26,22 @@ namespace Diaballik
             {
                 coord[i + 1] = 0;
                 coord[i] = i / 2;
+                Console.WriteLine(coord[i]);
+                Console.WriteLine(coord[i + 1]);
             }
             for (int i = NbTiles * 2; i < NbTiles * 4; i += 2)
             {
                 coord[i + 1] = NbTiles -1;
                 coord[i] = (i - NbTiles *2)/2;
+                Console.WriteLine(coord[i]);
+                Console.WriteLine(coord[i + 1]);
             }
             return coord;
         }
 
         public override int[] ComputeBallCoordinates()
         {
-            int[] res = { NbTiles / 2 + 1, NbTiles / 2 + 1 };
+            int[] res = { NbTiles / 2, NbTiles / 2 };
             return res;
         }
     }

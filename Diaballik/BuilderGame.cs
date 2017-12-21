@@ -100,17 +100,17 @@ namespace Diaballik
             }
         }
 
-        public void createGame()
+        public void CreateGame()
         {
-            Game.INSTANCE.Players[0]= createPlayer(Name1, Color1, 0);
+            Game.INSTANCE.Players[0]= CreatePlayer(Name1, Color1, 0);
             if (HasIA)
             {
-                Game.INSTANCE.Players[1] = createIAPlayer();
+                Game.INSTANCE.Players[1] = CreateIAPlayer();
                 Game.INSTANCE.gameHasIA = true;
             }
             else
             {
-                Game.INSTANCE.Players[1] = createPlayer(Name2, Color2, 1);
+                Game.INSTANCE.Players[1] = CreatePlayer(Name2, Color2, 1);
             }
 
             int[] coord = ComputePiecesCoordinates();
@@ -120,12 +120,12 @@ namespace Diaballik
 
         }
 
-        public HumanPlayer createPlayer(string n, string c, int nJoueur)
+        public HumanPlayer CreatePlayer(string n, string c, int nJoueur)
         {
             return new HumanPlayer(n, c, nJoueur, NbTiles);
         }
 
-        public IAPlayer createIAPlayer()
+        public IAPlayer CreateIAPlayer()
         {
             return new IAPlayer(Name2, Color2, NbTiles, Strat);
         }
@@ -134,13 +134,15 @@ namespace Diaballik
         {
             for(int i = 0; i < NbTiles*2; i+=2)
             {
-                Game.INSTANCE.Players[0].Pieces[i / 2].coordX = coord[i];
-                Game.INSTANCE.Players[0].Pieces[i / 2].coordY = coord[i+1];
+                MovePiece move = new MovePiece(Game.INSTANCE.Players[0].Pieces[i / 2], coord[i], coord[i + 1]);
+                move.Do();
+                Actions.INSTANCE.push(move);
             }
             for (int i = NbTiles * 2; i < NbTiles * 4; i += 2)
             {
-                Game.INSTANCE.Players[0].Pieces[i / 2].coordX = coord[i];
-                Game.INSTANCE.Players[0].Pieces[i / 2].coordY = coord[i + 1];
+                MovePiece move = new MovePiece(Game.INSTANCE.Players[1].Pieces[(i- NbTiles*2) / 2], coord[i], coord[i + 1]);
+                move.Do();
+                Actions.INSTANCE.push(move);
             }
         }
 
