@@ -44,6 +44,7 @@ namespace Diaballik
             throw new System.NotImplementedException();
         }
 
+
         public void setINSTANCE(Game inst)
         {
             INSTANCE = inst;
@@ -113,6 +114,12 @@ namespace Diaballik
             }
         }
 
+
+
+        public void run()
+        {
+            throw new System.NotImplementedException();
+        }
         /// <summary>
         /// Après chaque action, test si le compteur est égale à trois, s'il est égal à trois, c'est la fin du tour
         /// </summary>

@@ -134,13 +134,13 @@ namespace Diaballik
         {
             for(int i = 0; i < NbTiles*2; i+=2)
             {
-                MovePiece move = new MovePiece(Game.INSTANCE.Players[0].Pieces[i / 2], coord[i], coord[i + 1]);
+                MovePiece move = new MovePiece(-1, -1, coord[i], coord[i + 1]);
                 move.Do();
                 Actions.INSTANCE.push(move);
             }
             for (int i = NbTiles * 2; i < NbTiles * 4; i += 2)
             {
-                MovePiece move = new MovePiece(Game.INSTANCE.Players[1].Pieces[(i- NbTiles*2) / 2], coord[i], coord[i + 1]);
+                MovePiece move = new MovePiece(-1, -1, coord[i], coord[i + 1]);
                 move.Do();
                 Actions.INSTANCE.push(move);
             }
