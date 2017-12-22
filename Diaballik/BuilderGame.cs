@@ -133,6 +133,13 @@ namespace Diaballik
         public void CreateBoard()
         {
             Game.INSTANCE.Board = new Board(NbTiles);
+            for(int i = 0; i < NbTiles; i++)
+            {
+                for(int j = 0; j< NbTiles; j++)
+                {
+                    Game.INSTANCE.Board.Tiles[i, j] = Tiles.Default;
+                }
+            }
         }
 
 
@@ -141,15 +148,11 @@ namespace Diaballik
         {
             for(int i = 0; i < NbTiles*2; i+=2)
             {
-                MovePiece move = new MovePiece(-1, -1, coord[i], coord[i + 1]);
-                move.Do();
-                Actions.INSTANCE.push(move);
+                Game.INSTANCE.Board.Tiles[coord[i], coord[i + 1]] = Tiles.PiecePlayer0;
             }
             for (int i = NbTiles * 2; i < NbTiles * 4; i += 2)
             {
-                MovePiece move = new MovePiece(-1, -1, coord[i], coord[i + 1]);
-                move.Do();
-                Actions.INSTANCE.push(move);
+                Game.INSTANCE.Board.Tiles[coord[i], coord[i + 1]] = Tiles.PiecePlayer1;
             }
         }
 

@@ -14,12 +14,14 @@ namespace Diaballik
 
         public MoveBall(int x1, int y1, int x2, int y2)
         {
-            throw new System.NotImplementedException();
+            prevX = x1;
+            prevY = y1;
+            nextX = x2;
+            nextY = y2;
         }
 
         ~MoveBall()
         {
-            throw new System.NotImplementedException();
         }
 
         public int prevX
@@ -67,7 +69,22 @@ namespace Diaballik
 
         public override bool CanDo()
         {
-            return false;
+            if (Game.INSTANCE.Board.Tiles[nextX, nextY] == Tiles.Default)
+            {
+                if ((Math.Abs(nextX - prevX) == 1 && prevY == nextX) || (Math.Abs(nextY - prevY) == 1 && prevX == nextX))
+                {
+                    return true;
+                }
+                if (prevX == -1 && prevY == -1)
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void Redo()
