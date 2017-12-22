@@ -14,10 +14,10 @@ namespace DiaballikTest
         [TestMethod]
         public void TestMethodCreatePlayer()
         {
-            Player p1 = new HumanPlayer("nom", "red", 0, 3);
-            Player p2 = build.CreatePlayer("nom", "red", 0);
+            Player p1 = new HumanPlayer("nom", "red");
+            Player p2 = build.CreatePlayer("nom", "red");
 
-            Assert.IsTrue((p1.Name == p2.Name) && (p1.Color == p2.Color) && p1.Pieces.Length == p2.Pieces.Length);
+            Assert.IsTrue((p1.Name == p2.Name) && (p1.Color == p2.Color));
         }
 
         [TestMethod]
@@ -25,22 +25,21 @@ namespace DiaballikTest
         {
             StandardBuilder buildIA = new StandardBuilder("Jean", "Jacques", "red", "green", 7, new NoobStrategy());
             IAStrategy Strat = new NoobStrategy();
-            Player p1 = new HumanPlayer("nom", "red", 0, 7);
+            Player p1 = new IAPlayer("nom", "red", Strat);
             IAPlayer p2 = buildIA.CreateIAPlayer();
 
-            Assert.IsTrue((p1.Name == p2.Name) && (p1.Color == p2.Color) && p1.Pieces.Length == p2.Pieces.Length && p2.IAStrategy.GetType() == Strat.GetType());
+            Assert.IsTrue((p1.Name == p2.Name) && (p1.Color == p2.Color) && p2.IAStrategy.GetType() == Strat.GetType());
         }
 
         [TestMethod]
         public void TestMethodPlaceBalls()
         {
-            Player[] players = { build.CreatePlayer(build.Name1, build.Color1, 0), build.CreatePlayer(build.Name2, build.Color2, 1) };
-            Game.INSTANCE.Players = players;
+            build.CreateBoard();
 
             int[] coord = { 0, 0 };
             build.PlaceBalls(coord);
 
-            Assert.IsTrue(Game.INSTANCE.Players[0].Pieces[0].carryBall && Game.INSTANCE.Players[1].Pieces[0].carryBall);
+            Assert.IsTrue(Game.INSTANCE.Board.Tiles[coord[0], 0]== Tiles.BallPlayer0);
         }
 
         [TestMethod]

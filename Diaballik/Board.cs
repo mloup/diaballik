@@ -16,17 +16,18 @@ namespace Diaballik
 
     public class Board
     {
-        private Tiles[][] tiles;
+        private Tiles[,] tiles;
         private int boardSize;
 
         public Board()
         {
-            int boardSize = Game.INSTANCE.nbCaseBoard;
-            tiles = new Tiles[boardSize][];
-            for (int i = 0; i < boardSize; i++)
-            {
-                tiles[i] = new Tiles[boardSize];
-            }
+            
+        }
+
+        public Board(int nbTiles)
+        {
+            int boardSize = nbTiles;
+            tiles = new Tiles[boardSize, boardSize];
         }
 
         ~Board()
@@ -34,7 +35,7 @@ namespace Diaballik
             throw new System.NotImplementedException();
         }
 
-        public Tiles[][] Tiles
+        public Tiles[,] Tiles
         {
             get => tiles;
             set

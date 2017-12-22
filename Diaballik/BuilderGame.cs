@@ -130,6 +130,13 @@ namespace Diaballik
             return new IAPlayer(Name2, Color2, strat);
         }
 
+        public void CreateBoard()
+        {
+            Game.INSTANCE.Board = new Board(NbTiles);
+        }
+
+
+
         public void PlacePieces(int[] coord)
         {
             for(int i = 0; i < NbTiles*2; i+=2)
@@ -148,7 +155,8 @@ namespace Diaballik
 
         public void PlaceBalls(int[] coord)
         {
-            // TODO
+            Game.INSTANCE.Board.Tiles[coord[0],0 ] = Tiles.BallPlayer0;
+            Game.INSTANCE.Board.Tiles[coord[1], Game.INSTANCE.Board.BoardSize - 1] = Tiles.BallPlayer1;
         }
 
         public abstract int[] ComputePiecesCoordinates();

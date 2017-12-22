@@ -10,3 +10,9 @@ C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\Diaballik\obj\Debug\Diabal
 C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\Diaballik\obj\Debug\Diaballik.dll
 C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\Diaballik\obj\Debug\Diaballik.pdb
 C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\Diaballik\obj\Debug\Diaballik.csprojResolveAssemblyReference.cache
+C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\diaballik\Diaballik\obj\Debug\Diaballik.csprojResolveAssemblyReference.cache
+C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\diaballik\Diaballik\obj\Debug\Diaballik.csproj.CoreCompileInputs.cache
+C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\diaballik\Diaballik\obj\Debug\Diaballik.dll
+C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\diaballik\Diaballik\obj\Debug\Diaballik.pdb
+C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\diaballik\Diaballik\bin\Debug\Diaballik.dll
+C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\diaballik\Diaballik\bin\Debug\Diaballik.pdb
