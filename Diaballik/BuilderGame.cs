@@ -20,9 +20,6 @@ namespace Diaballik
 
         public BuilderGame()
         {
-            nbActions = 0;
-            endTurnClicked = false;
-            finished = false;
         }
 
         public BuilderGame SetPlayer0(Player p)
@@ -63,7 +60,10 @@ namespace Diaballik
             game.Board = board;
             game.GameHasIA = hasIA;
             game.Players = players;
-            game.CurrentPlayer = new Random().Next(0, 2);
+            nbActions = 0;
+            endTurnClicked = false;
+            finished = false;
+            currplayer = new Random().Next(0, 2);
         }
 
         public Game Build()
