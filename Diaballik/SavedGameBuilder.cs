@@ -9,11 +9,11 @@ namespace Diaballik
     {
         private SaveGameData savedfile;
 
-        public SavedGameBuilder(string name1, string name2, string colour1, string colour2, int nbTiles)
+        public SavedGameBuilder()
         {
         }
 
-        public SavedGameBuilder(string name1, string name2, string colour1, string colour2, int nbTiles, IAStrategy st)
+        public SavedGameBuilder()
         {
         }
 

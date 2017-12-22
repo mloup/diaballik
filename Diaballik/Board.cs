@@ -25,8 +25,15 @@ namespace Diaballik
 
         public Board(int nbTiles)
         {
-            int boardSize = nbTiles;
-            tiles = new Tiles[boardSize, boardSize];
+            this.boardSize = nbTiles;
+            this.tiles = new Tiles[boardSize, boardSize];
+        }
+
+        // Seulement utilisé pour les tests
+        public Board(int nbTiles, Tiles[,] tiles)
+        {
+            this.boardSize = nbTiles;
+            this.Tiles = tiles;
         }
 
         ~Board()

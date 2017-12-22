@@ -25,13 +25,13 @@ namespace Diaballik
         {
             for (int i = 0; i < board.BoardSize; i++)
             {
-                board.Tiles[i, 0] = (i == ((board.BoardSize + 1) / 2)) ? Tiles.BallPlayer0 : Tiles.Default;
+                
 
             }
 
             for (int i = 0; i < board.BoardSize; i++)
             {
-                board.Tiles[i, board.BoardSize - 1] = (i == ((board.BoardSize + 1) / 2)) ? Tiles.BallPlayer1 : Tiles.Default ;
+                
             }
 
             return board;
