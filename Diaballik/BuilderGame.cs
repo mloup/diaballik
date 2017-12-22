@@ -102,15 +102,15 @@ namespace Diaballik
 
         public void CreateGame()
         {
-            Game.INSTANCE.Players[0]= CreatePlayer(Name1, Color1, 0);
+            Game.INSTANCE.Players[0]= CreatePlayer(Name1, Color1); //pourquoi ne pas mettre directement le new HumanPlayer ici ?
             if (HasIA)
             {
-                Game.INSTANCE.Players[1] = createIAPlayer();
+                Game.INSTANCE.Players[1] = CreateIAPlayer(); //pourquoi ne pas mettre directement le new IAPlayer ici ?
                 Game.INSTANCE.GameHasIA = true;
             }
             else
             {
-                Game.INSTANCE.Players[1] = CreatePlayer(Name2, Color2, 1);
+                Game.INSTANCE.Players[1] = CreatePlayer(Name2, Color2);
             }
 
             int[] coord = ComputePiecesCoordinates();
@@ -120,14 +120,14 @@ namespace Diaballik
 
         }
 
-        public HumanPlayer CreatePlayer(string n, string c, int nJoueur)
+        public HumanPlayer CreatePlayer(string n, string c)
         {
-            return new HumanPlayer(n, c, nJoueur, NbTiles);
+            return new HumanPlayer(n, c);
         }
 
         public IAPlayer CreateIAPlayer()
         {
-            return new IAPlayer(Name2, Color2, NbTiles, Strat);
+            return new IAPlayer(Name2, Color2, strat);
         }
 
         public void PlacePieces(int[] coord)
@@ -148,8 +148,7 @@ namespace Diaballik
 
         public void PlaceBalls(int[] coord)
         {
-            Game.INSTANCE.Players[0].Pieces[coord[0]].carryBall = true;
-            Game.INSTANCE.Players[1].Pieces[coord[1]].carryBall = true;
+            // TODO
         }
 
         public abstract int[] ComputePiecesCoordinates();

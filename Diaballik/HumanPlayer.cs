@@ -7,7 +7,7 @@ namespace Diaballik
 {
     public class HumanPlayer : Player
     {
-        public HumanPlayer(string name, string colour, int nJoueur, int nBTiles) : base (name, colour, nJoueur, nBTiles)
+        public HumanPlayer(string name, string colour) : base (name, colour)
         {
         }
 

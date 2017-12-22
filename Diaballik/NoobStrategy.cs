@@ -83,10 +83,30 @@ namespace Diaballik
                 Console.WriteLine("exception2 !");
                 return Action.DoNothing;
             }*/
-            Action returnedMove = Action.Default;
-            int[] returnedAttr = new int[4];
-            Algo_doActionNoobStrategy(algoPtr, Game.INSTANCE.Board.Tiles.Cast<int[]>().ToArray(), returnedMove, returnedAttr);
-            return returnedMove;
+
+
+            try
+            {
+                Action returnedMove = Action.Default;
+                int[] returnedAttr = new int[4];
+                Algo_doActionNoobStrategy(algoPtr, Game.INSTANCE.Board.Tiles.Cast<int[]>().ToArray(), returnedMove, returnedAttr);
+                return returnedMove;
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("exception1 !");
+                return Action.DoNothing;
+            }
+            catch (System.TypeInitializationException)
+            {
+                Console.WriteLine("exception2 !");
+                return Action.DoNothing;
+            }
+            catch (System.ArgumentNullException)
+            {
+                Console.WriteLine("exception3 !");
+                return Action.DoNothing;
+            }
         }
 
         public void Dispose()

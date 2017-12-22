@@ -10,7 +10,7 @@ namespace Diaballik
         private string color;
         private string name;
 
-        public Player(string n, string col, int nJoueur, int nBTiles)
+        public Player(string n, string col)
         {
             Color = col;
             Name = n;

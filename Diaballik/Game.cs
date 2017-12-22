@@ -26,8 +26,8 @@ namespace Diaballik
             EndTurnClicked = false;
             finished = false;
             gamehasia = false;
-            players[0] = new HumanPlayer("Marie", "bleu", 0, 7);
-            players[1] = new HumanPlayer("Pierre", "vert", 1, 7);
+            players[0] = new HumanPlayer("Marie", "bleu");
+            players[1] = new HumanPlayer("Pierre", "vert");
             board = new Board();
         }
 
