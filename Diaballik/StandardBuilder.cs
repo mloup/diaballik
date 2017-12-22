@@ -26,7 +26,7 @@ namespace Diaballik
         {
         }
 
-        public override BuilderGame Create()
+        public static BuilderGame Create()
         {
             BuilderGame builderGame = new StandardBuilder();
             return builderGame;

@@ -7,43 +7,34 @@ namespace Diaballik
 {
     public class BallRandomBuilder : BuilderGame
     {
-        public BallRandomBuilder(string name1, string name2, string colour1, string colour2, int nbTiles): base(name1, name2, colour1, colour2, nbTiles)
-        {
-        }
-
-        public BallRandomBuilder(string name1, string name2, string colour1, string colour2, int nbTiles, IAStrategy st) : base(name1, name2, colour1, colour2, nbTiles, st)
+        public BallRandomBuilder()
         {
         }
 
         ~BallRandomBuilder()
         {
-            throw new System.NotImplementedException();
         }
 
-        public override int[] ComputePiecesCoordinates()
+        public static BuilderGame Create()
         {
-            int[] coord = new int[NbTiles * 4];
-
-            // Pieces du premier joueur
-            for (int i = 0; i < NbTiles * 2; i += 2)
-            {
-                coord[i + 1] = 0;
-                coord[i] = i / 2;
-            }
-            // Pieces du second joueur
-            for (int i = NbTiles * 2; i < NbTiles * 4; i += 2)
-            {
-                coord[i + 1] = NbTiles - 1;
-                coord[i] = (i - NbTiles * 2) / 2;
-            }
-            return coord;
+            BuilderGame builderGame = new StandardBuilder();
+            return builderGame;
         }
 
-        public override int[] ComputeBallCoordinates()
+        protected override Board FillBoard()
         {
-            Random random = new Random();
-            int[] res = { random.Next(0, NbTiles), random.Next(0, NbTiles) };
-            return res;
+            for (int i = 0; i < board.BoardSize; i++)
+            {
+                board.Tiles[i, 0] = (i == ((board.BoardSize + 1) / 2)) ? Tiles.BallPlayer0 : Tiles.Default;
+
+            }
+
+            for (int i = 0; i < board.BoardSize; i++)
+            {
+                board.Tiles[i, board.BoardSize - 1] = (i == ((board.BoardSize + 1) / 2)) ? Tiles.BallPlayer1 : Tiles.Default ;
+            }
+
+            return board;
         }
     }
 }

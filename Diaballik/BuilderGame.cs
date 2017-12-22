@@ -7,16 +7,16 @@ namespace Diaballik
 {
     public abstract class BuilderGame
     {
-        private Diaballik.Player[] players = new Player[2];
-        private int nbtiles;
-        private int currplayer;
-        private int nbActions;
-        private bool hasIA;
-        private bool endTurnClicked;
-        private bool finished;
+        protected Diaballik.Player[] players = new Player[2];
+        protected int nbtiles;
+        protected int currplayer;
+        protected int nbActions;
+        protected bool hasIA;
+        protected bool endTurnClicked;
+        protected bool finished;
 
-        private Board board;
-        private IAStrategy strat;
+        protected Board board;
+        protected IAStrategy strat;
 
         public BuilderGame()
         {
@@ -73,7 +73,6 @@ namespace Diaballik
             return game;
         }
 
-        public abstract BuilderGame Create();
         protected abstract Board FillBoard();
         
 
@@ -103,31 +102,5 @@ namespace Diaballik
                 nbtiles = value;
             }
         }
-
-
-        public void PlacePieces(int[] coord)
-        {
-            for(int i = 0; i < NbTiles*2; i+=2)
-            {
-                MovePiece move = new MovePiece(-1, -1, coord[i], coord[i + 1]);
-                move.Do();
-                Actions.INSTANCE.push(move);
-            }
-            for (int i = NbTiles * 2; i < NbTiles * 4; i += 2)
-            {
-                MovePiece move = new MovePiece(-1, -1, coord[i], coord[i + 1]);
-                move.Do();
-                Actions.INSTANCE.push(move);
-            }
-        }
-
-        public void PlaceBalls(int[] coord)
-        {
-            Game.INSTANCE.Board.Tiles[coord[0],0 ] = Tiles.BallPlayer0;
-            Game.INSTANCE.Board.Tiles[coord[1], Game.INSTANCE.Board.BoardSize - 1] = Tiles.BallPlayer1;
-        }
-
-        public abstract int[] ComputePiecesCoordinates();
-        public abstract int[] ComputeBallCoordinates();
     }
 }
