@@ -68,7 +68,15 @@ namespace DiaballikTest
         [TestMethod]
         public void TestMethodPlacePieces()
         {
+            build.CreateBoard();
+            int[] coord = build.ComputePiecesCoordinates();
 
+            Assert.IsTrue(Game.INSTANCE.Board.Tiles[0,0] == Tiles.BallPlayer0
+                       && Game.INSTANCE.Board.Tiles[1, 0] == Tiles.BallPlayer0
+                       && Game.INSTANCE.Board.Tiles[2, 0] == Tiles.BallPlayer0
+                       && Game.INSTANCE.Board.Tiles[0, 2] == Tiles.BallPlayer1
+                       && Game.INSTANCE.Board.Tiles[1, 2] == Tiles.BallPlayer1
+                       && Game.INSTANCE.Board.Tiles[2, 2] == Tiles.BallPlayer1);
         }
     }
 }
