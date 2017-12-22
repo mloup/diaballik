@@ -7,12 +7,18 @@ namespace Diaballik
 {
     public class EnemyAmongUsBuilder : BuilderGame
     {
+        private Diaballik.Player[] players = new Player[2];
+        private int nbtiles;
+        private int currplayer;
+        private int nbActions;
+        private bool hasIA;
+        private bool endTurnClicked;
+        private bool finished;
 
-        public EnemyAmongUsBuilder(string name1, string name2, string colour1, string colour2, int nbTiles): base(name1, name2, colour1, colour2, nbTiles)
-        {
-        }
+        private Board board;
+        private IAStrategy strat;
 
-        public EnemyAmongUsBuilder(string name1, string name2, string colour1, string colour2, int nbTiles, IAStrategy st) : base(name1, name2, colour1, colour2, nbTiles, st)
+        public EnemyAmongUsBuilder()
         {
         }
 
@@ -21,6 +27,29 @@ namespace Diaballik
             throw new System.NotImplementedException();
         }
 
+        public override BuilderGame Create()
+        {
+            BuilderGame builderGame = new StandardBuilder();
+            return builderGame;
+        }
+
+        protected override Board FillBoard()
+        {
+            for (int i = 0; i < board.BoardSize; i++)
+            {
+                board.Tiles[i, 0] = (i == ((board.BoardSize + 1) / 2)) ? Tiles.BallPlayer0 : Tiles.PiecePlayer0;
+
+            }
+
+            for (int i = 0; i < board.BoardSize; i++)
+            {
+                board.Tiles[i, board.BoardSize-1] = (i == ((board.BoardSize + 1) / 2)) ? Tiles.BallPlayer1 : Tiles.PiecePlayer1;
+            }
+
+            return board;
+        }
+
+        /*
         public override int[] ComputePiecesCoordinates()
         {
             int[] coord = new int[NbTiles * 4];
@@ -70,5 +99,6 @@ namespace Diaballik
             int[] res = { NbTiles / 2 + 1, NbTiles / 2 + 1 };
             return res;
         }
+        */
     }
 }

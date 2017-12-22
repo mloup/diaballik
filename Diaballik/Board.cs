@@ -20,8 +20,7 @@ namespace Diaballik
         private int boardSize;
 
         public Board()
-        {
-            
+        {  
         }
 
         public Board(int nbTiles)

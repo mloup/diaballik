@@ -10,7 +10,6 @@ namespace Diaballik
         public static Game INSTANCE = new Game();
         private int currplayer;
         private int nbactions;
-        private int nbcaseboard;
         private bool endturnclicked;
         private bool finished;
         private bool gamehasia;
@@ -22,7 +21,6 @@ namespace Diaballik
             Random random = new Random();
             CurrentPlayer = random.Next(0, 2);
             nbActions = 0;
-            nbCaseBoard = 0;
             EndTurnClicked = false;
             finished = false;
             gamehasia = false;
@@ -104,15 +102,6 @@ namespace Diaballik
             set
             {
                 endturnclicked = value;
-            }
-        }
-
-        public int nbCaseBoard
-        {
-            get => nbcaseboard;
-            set
-            {
-                nbcaseboard = value;
             }
         }
 
