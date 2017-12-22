@@ -17,7 +17,6 @@ namespace Diaballik
 
         ~Actions()
         {
-            throw new System.NotImplementedException();
         }
 
         public List<Command> commandList
@@ -31,17 +30,19 @@ namespace Diaballik
 
         public void push(Diaballik.Command command)
         {
-            throw new System.NotImplementedException();
+            commandList.Add(command);
         }
 
         public Diaballik.Command pop()
         {
-            throw new System.NotImplementedException();
+            Command ret = commandList.Last();
+            commandList.Remove(commandList.Last());
+            return ret;
         }
 
         public void set(Diaballik.Actions actionsList)
         {
-            throw new System.NotImplementedException();
+            INSTANCE = actionsList;
         }
     }
 }

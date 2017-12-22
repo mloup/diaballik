@@ -64,27 +64,87 @@ namespace Diaballik
 
         public override void Do()
         {
-
+            Tiles tile = Game.INSTANCE.Board.Tiles[nextX, nextY];
+            Game.INSTANCE.Board.Tiles[nextX, nextY] = Game.INSTANCE.Board.Tiles[prevX, prevY];
+            Game.INSTANCE.Board.Tiles[prevX, prevY] = tile;
         }
 
         public override bool CanDo()
         {
-            if (Game.INSTANCE.Board.Tiles[nextX, nextY] == Tiles.Default)
+            Tiles tile = Game.INSTANCE.Board.Tiles[prevX, prevY];
+            bool okay = true;
+            if (nextX == prevX)
             {
-                if ((Math.Abs(nextX - prevX) == 1 && prevY == nextX) || (Math.Abs(nextY - prevY) == 1 && prevX == nextX))
+                for(int i = Math.Min(prevY, nextY)+1; i< Math.Max(prevY, nextY); i++)
                 {
-                    return true;
+                    if (!(Game.INSTANCE.Board.Tiles[nextX, i] == Tiles.Default)) okay = false;
                 }
-                if (prevX == -1 && prevY == -1)
-                {
-                    return true;
-                }
-                return false;
-            }
-            else
+            }else if(nextY == prevY)
             {
-                return false;
+                for (int i = Math.Min(prevX, nextX) + 1; i < Math.Max(prevX, nextX); i++)
+                {
+                    if (!(Game.INSTANCE.Board.Tiles[i, nextY] == Tiles.Default)) okay = false;
+                }
             }
+            else if(prevY < nextY && prevX < nextX)
+            {
+                for (int i = 1; i < nextY - prevY; i++)
+                {
+                    if (!(Game.INSTANCE.Board.Tiles[prevX + i, prevY + i] == Tiles.Default)) okay = false;
+                }
+
+            }
+            else if(prevY > nextY && prevX > nextX)
+            {
+                for (int i = 1; i < prevY - nextY; i++)
+                {
+                    if (!(Game.INSTANCE.Board.Tiles[prevX - i, prevY - i] == Tiles.Default)) okay = false;
+                }
+            }
+            else if(prevY < nextY && prevX > nextX)
+            {
+                for (int i = 1; i < nextY - prevY; i++)
+                {
+                    if (!(Game.INSTANCE.Board.Tiles[prevX - i, prevY + i] == Tiles.Default)) okay = false;
+                }
+            }
+            else if(prevY > nextY && prevX < nextX)
+            {
+                for (int i = 1; i < nextX - prevX; i++)
+                {
+                    if (!(Game.INSTANCE.Board.Tiles[prevX + i, prevY - i] == Tiles.Default)) okay = false;
+                }
+            }
+
+
+            switch (tile)
+            {
+                case Tiles.BallPlayer0:
+                    if(Game.INSTANCE.Board.Tiles[nextX, nextY] == Tiles.PiecePlayer0)
+                    {
+                        if (okay) return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case Tiles.BallPlayer1:
+                    if (Game.INSTANCE.Board.Tiles[nextX, nextY] == Tiles.PiecePlayer1)
+                    {
+                        if (okay) return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                default: return false;
+
+
+            }
+            return false;
+            
         }
 
         public override void Redo()
@@ -94,7 +154,9 @@ namespace Diaballik
 
         public override void Undo()
         {
-
+            Tiles tile = Game.INSTANCE.Board.Tiles[nextX, nextY];
+            Game.INSTANCE.Board.Tiles[nextX, nextY] = Game.INSTANCE.Board.Tiles[prevX, prevY];
+            Game.INSTANCE.Board.Tiles[prevX, prevY] = tile;
         }
     }
 }
