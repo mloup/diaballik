@@ -14,7 +14,7 @@
     <ProjectGuid>{81E670FE-8518-4C71-B28D-D3D6AC90C790}</ProjectGuid>
     <RootNamespace>libCPPP</RootNamespace>
     <ProjectName>libCPP</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

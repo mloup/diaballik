@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace DiaballikTest
 {
+    /*
     [TestClass]
     public class StandardBuilderTest
     {
@@ -78,5 +79,5 @@ namespace DiaballikTest
                        && Game.INSTANCE.Board.Tiles[1, 2] == Tiles.BallPlayer1
                        && Game.INSTANCE.Board.Tiles[2, 2] == Tiles.BallPlayer1);
         }
-    }
+    }*/
 }

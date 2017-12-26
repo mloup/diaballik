@@ -1,21 +1,29 @@
 #include "Algo.h"
 #include <iostream>
 #include <algorithm>
-#include <time.h>
-#include <math.h> 
+#include <stdio.h>
 
 
 using namespace std;
 
 
 
-void Algo::doActionNoobStrategy(Tiles** tiles, Action returnedMove, int returnedAttr[])
+void Algo::doActionNoobStrategy(Tiles** tiles, int size, Command* returnedMove, int* returnedAttr)
 {
 	// analyze some stuff
 	// TODO
+	printf("test1\n");
 
-	// Attributs de retour
-	returnedMove = MoveBall;
+	//printf("%i\n", tiles[0][0]);
+	/*
+	for (int i = 0; i < size ; i++) {
+		for (int j = 0; j < size; j++) {
+			printf("%i\n", tiles[i][j]);
+		}
+	}*/
+	printf("test2\n");
+	// Paramètre de retour
+	returnedMove[0] = MovePiece;
 	returnedAttr[0] = 1;
 	returnedAttr[1] = 1;
 	returnedAttr[2] = 1;

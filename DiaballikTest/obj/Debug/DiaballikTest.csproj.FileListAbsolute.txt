@@ -16,7 +16,20 @@ C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\DiaballikTest\obj\Debug\Di
 C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\DiaballikTest\obj\Debug\DiaballikTest.csproj.CoreCompileInputs.cache
 C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\DiaballikTest\obj\Debug\DiaballikTest.dll
 C:\Users\MARIE\Documents\Visual Studio 2017\Diaballik\DiaballikTest\obj\Debug\DiaballikTest.pdb
-C:\Users\Pierre\Documents\diaballik\DiaballikTest\obj\Debug\DiaballikTest.csprojResolveAssemblyReference.cache
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\DiaballikTest.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\DiaballikTest.pdb
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Diaballik.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Diaballik.pdb
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Pierre\Documents\diaballik\DiaballikTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\Users\Pierre\Documents\diaballik\DiaballikTest\obj\Debug\DiaballikTest.csproj.CoreCompileInputs.cache
 C:\Users\Pierre\Documents\diaballik\DiaballikTest\obj\Debug\DiaballikTest.dll
 C:\Users\Pierre\Documents\diaballik\DiaballikTest\obj\Debug\DiaballikTest.pdb
