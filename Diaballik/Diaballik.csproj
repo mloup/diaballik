@@ -41,26 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command\Actions.cs" />
+    <Compile Include="Actions\Actions.cs" />
+    <Compile Include="Actions\EndTurn.cs" />
     <Compile Include="Engine\Builder\BallRandomBuilder.cs" />
     <Compile Include="Engine\Board.cs" />
     <Compile Include="Engine\Builder\SavedGameBuilder.cs" />
     <Compile Include="Engine\Builder\GameBuilder.cs" />
     <Compile Include="Engine\GameSaveManager.cs" />
-    <Compile Include="Command\Command.cs" />
+    <Compile Include="Actions\Command.cs" />
     <Compile Include="Engine\Builder\EnemyAmongUsBuilder.cs" />
     <Compile Include="Engine\Game.cs" />
-    <Compile Include="Engine\GameDataCollector.cs" />
+    <Compile Include="Engine\GameMementoCaretaker.cs" />
     <Compile Include="Player\HumanPlayer.cs" />
     <Compile Include="Player\IAPlayer.cs" />
     <Compile Include="Player\IAStrategy\IAStrategy.cs" />
-    <Compile Include="Command\MoveBall.cs" />
-    <Compile Include="Command\MovePiece.cs" />
+    <Compile Include="Actions\MoveBall.cs" />
+    <Compile Include="Actions\MovePiece.cs" />
     <Compile Include="Player\IAStrategy\NoobStrategy.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Player\IAStrategy\ProgressiveStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Engine\GameData.cs" />
+    <Compile Include="Engine\GameMemento.cs" />
     <Compile Include="Engine\Builder\StandardBuilder.cs" />
     <Compile Include="Player\IAStrategy\StartingStrategy.cs" />
   </ItemGroup>

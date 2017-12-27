@@ -48,8 +48,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\EndTurnTest.cs" />
+    <Compile Include="Actions\MoveBallTest.cs" />
+    <Compile Include="Actions\MovePieceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StandardBuilderTest.cs" />
+    <Compile Include="GameBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -59,6 +62,12 @@
       <Project>{3d2347f7-74e0-4bd2-bc82-6c8a99491153}</Project>
       <Name>Diaballik</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Debug\libCPP.dll">
+      <Link>libCPP.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diaballik", "Diaballik\Diaballik.csproj", "{3D2347F7-74E0-4BD2-BC82-6C8A99491153}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaballikTest", "DiaballikTest\DiaballikTest.csproj", "{291B7D66-247B-42E1-8A97-B24C7952183C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{81E670FE-8518-4C71-B28D-D3D6AC90C790} = {81E670FE-8518-4C71-B28D-D3D6AC90C790}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libCPP", "libCPP\libCPPP.vcxproj", "{81E670FE-8518-4C71-B28D-D3D6AC90C790}"
 EndProject
