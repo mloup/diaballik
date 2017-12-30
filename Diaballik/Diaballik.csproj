@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\CommandHistory.cs" />
+    <Compile Include="Actions\CommandMemento.cs" />
     <Compile Include="Actions\EndTurn.cs" />
     <Compile Include="Engine\Builder\BallRandomBuilder.cs" />
     <Compile Include="Engine\Board.cs" />

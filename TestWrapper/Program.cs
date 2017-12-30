@@ -13,10 +13,10 @@ namespace TestWrapper
                 var algo = new NoobStrategy();
                 Player p1 = new IAPlayer("Pierre", "noir", algo);
 
-                Game.INSTANCE = StandardBuilder.Create().SetBoard(3).SetPlayer1(p1).SetPlayer0(p0).Build();
+                Game g = StandardBuilder.Create().SetBoard(3).SetPlayer1(p1).SetPlayer0(p0).Build();
                 
-                NoobStrategy.Command res = algo.PlayOneAction();
-                Console.WriteLine(res);
+                algo.PlayOneAction(g);
+                Console.WriteLine(g.CommandHistory.Peek().GetCommand().GetType());
                 Console.ReadLine();
             }
             catch (NullReferenceException)

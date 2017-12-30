@@ -1,11 +1,11 @@
 #pragma once
 
-enum Command
+enum EnumCommand
 {
 	Default = 0,
 	MovePiece = 1,
 	MoveBall = 2,
-	DoNothing = 3
+	EndTurn = 3
 };
 
 enum Tiles
@@ -24,7 +24,7 @@ public:
 	~Algo() {}
 
 	// You can change the return type and the parameters according to your needs.
-	void Algo::doActionNoobStrategy(Tiles** tiles, int size, Command returnedMove[], int returnedAttr[]);
+	void Algo::doActionNoobStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
 };
 
 
@@ -33,8 +33,8 @@ public:
 // export all C++ class/methods as friendly C functions to be consumed by external component in a portable way
 ///
 
-EXPORTCDECL void Algo_doActionNoobStrategy(Algo* algo, Tiles** tiles, int size,  Command returnedMove[], int returnedAttr[]) {
-	return algo->doActionNoobStrategy(tiles, size, returnedMove, returnedAttr);
+EXPORTCDECL void Algo_doActionNoobStrategy(Algo* algo, Tiles** tiles, int size,  EnumCommand returnedMove[2], int prevX[], int prevY[], int nextX[], int nextY[]) {
+	return algo->doActionNoobStrategy(tiles, size, returnedMove,  prevX, prevY, nextX, nextY);
 }
 
 EXPORTCDECL Algo* Algo_new() {
