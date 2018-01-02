@@ -16,7 +16,7 @@ namespace Diaballik
 
 
             //Convert MutliDim Enum Array to 1-Dim Int Array
-            var intArray = GetIntArray(g.Board.Tiles);
+            int[] intArray = GetIntArray(g.Board.Tiles);
             int nbTiles = g.Board.Tiles.Length;
 
             IntPtr actionPtr = Algo_doActionNoobStrategy(intArray, nbTiles);

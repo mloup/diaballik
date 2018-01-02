@@ -21,10 +21,10 @@ enum Tiles
 using namespace std;
 namespace Strategy {
 
-	EXPORTCDECL int&  Algo_doActionNoobStrategy(Tiles* tiles, int size);
-	EXPORTCDECL void doActionStartingStrategy(Tiles* tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
-	EXPORTCDECL void doActionProgressiveStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
+	EXPORTCDECL int&  Algo_doActionNoobStrategy(const Tiles* tiles, const int  nbTiles);
+	//EXPORTCDECL void doActionStartingStrategy(Tiles* tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
+	//EXPORTCDECL void doActionProgressiveStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
 
-	void MovePieceNoobStrategy(Tiles* tiles, int size, int*& tab);
-	int GetRandomMoveAmongPossible(Tiles*(&tiles), int& sideSize, int& const indexOfMyPieceToMove);
+	void MovePieceNoobStrategy(const Tiles*& tiles, const int& nbTiles, int*& actionResult);
+	int GetRandomMoveAmongPossible(const Tiles*(&tiles), const int& sideSize, int& const indexOfMyPieceToMove);
 };

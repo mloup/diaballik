@@ -10,26 +10,31 @@
 using namespace std;
 
 namespace Strategy {
-	int&  Algo_doActionNoobStrategy(Tiles* tiles, int size)
+	int&  Algo_doActionNoobStrategy(const Tiles* tiles, const int nbTiles)
 	{
+		srand((unsigned int) time(NULL));  // Positionnement de random() au nombre de secondes écoulées depuis 1970
 		int* actionResult = new int[5];
-		//actionResult[0] = (rand() % 3);
-		actionResult[0] = (EnumCommand) 0;
-		//actionResult[1] = 0;
-		//actionResult[2] = 0;
-		//actionResult[3] = 1;
-
+		actionResult[0] = (rand() % 3);
 
 		switch ((EnumCommand)actionResult[0])
 		{
 		case MovePiece:
-			MovePieceNoobStrategy(tiles, size, actionResult);
+			MovePieceNoobStrategy(tiles, nbTiles, actionResult);
 			break;
 
 		case MoveBall:
+			actionResult[1] = 2;
+			actionResult[2] = 1;
+			actionResult[3] = 1;
+			actionResult[4] = 1;
+			//MoveBallNoobStrategy(tiles, nbTiles, actionResult);
 			break;
 
 		case EndTurn:
+			actionResult[1] = -1;
+			actionResult[2] = -1;
+			actionResult[3] = -1;
+			actionResult[4] = -1;
 			break;
 
 		Default :
@@ -41,9 +46,7 @@ namespace Strategy {
 
 
 
-	void MovePieceNoobStrategy(Tiles* tiles, int nbTiles, int*(& actionResult)) {
-		srand(time(NULL));									// Positionnement de random() au nombre de secondes écoulées depuis 1970
-		
+	void MovePieceNoobStrategy(const Tiles*& tiles, const int& nbTiles, int*& actionResult){
 		int sideSize = (int) sqrt(nbTiles);
 		int randomPieceToSelect = (rand() % (sideSize - 1));	// Selection aléatoire d'une des (sideSize - 1) pièces (ne portant pas la balle) de l'IA
 
@@ -51,7 +54,6 @@ namespace Strategy {
 		int oldIndex;
 		int prevX, prevY, nextX, nextY;						// Paramètre de la commande à executer
 		
-		//printf("%i \n", nbTiles);
 		printf("RandomPieceToSelect = %i \n", randomPieceToSelect);
 
 
@@ -70,55 +72,43 @@ namespace Strategy {
 		prevX = (int) oldIndex / sideSize;
 		prevY = oldIndex % sideSize;
 
-		printf("Selection de la piece : X = %i  et  Y = %i \n", prevX, prevY);
+		//printf("Selection de la piece : X = %i  et  Y = %i \n", prevX, prevY);
 
 		int newIndex = GetRandomMoveAmongPossible(tiles, sideSize, oldIndex);
 
 		nextX = (int) newIndex / sideSize;
 		nextY = newIndex % sideSize;
 
-		/*
-		randomDirection = (rand() % 4);
-		switch (randomDirection)
-		{
-		case 0: // move up
-			nextX = prevX;
-			nextY = (prevY - 1 < 0) ? prevY + 1 : prevY - 1;
-			break;
-
-		case 1: // move down
-			nextX = prevX;
-			nextY = (prevY + 1 >= sideSize) ? prevY - 1 : prevY + 1;
-			break;
-
-		case 2: // move right
-			nextX = (prevX + 1 >= sideSize) ? prevX - 1 : prevX + 1;
-			nextY = prevY;
-			break;
-
-		case 3: // move left
-			nextX = (prevX - 1 < 0) ? prevX + 1 : prevX - 1;
-			nextY = prevY;
-			break;
-		}
-		*/
 		actionResult[1] = prevX;
 		actionResult[2] = prevY;
 		actionResult[3] = nextX;
 		actionResult[4] = nextY;
 	}
 
-	int GetRandomMoveAmongPossible(Tiles*(& tiles), int& sideSize, int& const oldIndex) {
-		int moveUp = (oldIndex%sideSize != 0 && tiles[oldIndex - 1] == DefTiles) ? 1 : 0;
-		int moveDown = (oldIndex%sideSize != (sideSize -1) && tiles[oldIndex + 1] == DefTiles) ? 1 : 0;
-		int moveLeft = (oldIndex-sideSize >= 0 && tiles[oldIndex - sideSize] == DefTiles) ? 1 : 0;
-		int moveRight = (oldIndex+sideSize <= sideSize && tiles[oldIndex + sideSize] == DefTiles) ? 1 : 0;
+	int GetRandomMoveAmongPossible(const Tiles*(&tiles), const int& sideSize, int& const oldIndex) {
+		int* moveArray = new int[4];
 
-		int nbPossibleMoves = moveUp + moveDown + moveLeft + moveRight;
-		int randomMoveAmongPossible = (rand() % (nbPossibleMoves+1));
+		moveArray[0] = (oldIndex%sideSize != 0 && tiles[oldIndex - 1] == DefTiles) ? 1 : 0; // up
+		moveArray[1] = (oldIndex%sideSize != (sideSize - 1) && tiles[oldIndex + 1] == DefTiles) ? 1 : 0; // down
+		moveArray[2] = (oldIndex - sideSize >= 0 && tiles[oldIndex - sideSize] == DefTiles) ? 1 : 0; // left
+		moveArray[3] = (oldIndex + sideSize <= sideSize && tiles[oldIndex + sideSize] == DefTiles) ? 1 : 0; // right
 
-		//TODO
-		return 0;
+		int randomMoveAmongPossible = (rand() % 4);
+		while (moveArray[randomMoveAmongPossible] != 1)
+		{
+			randomMoveAmongPossible = (rand() % 4);
+		}
+
+		switch(randomMoveAmongPossible) {
+		case 0:
+			return oldIndex - 1;
+		case 1:
+			return oldIndex + 1;
+		case 2:
+			return oldIndex - sideSize;
+		case 3:
+			return oldIndex + sideSize;
+		}
 	}
 
 
