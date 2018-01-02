@@ -1,11 +1,12 @@
 #pragma once
 
+#define EXPORTCDECL extern "C" __declspec(dllexport)
+
 enum EnumCommand
 {
-	Default = 0,
-	MovePiece = 1,
-	MoveBall = 2,
-	EndTurn = 3
+	MovePiece = 0,
+	MoveBall = 1,
+	EndTurn = 2
 };
 
 enum Tiles
@@ -17,30 +18,13 @@ enum Tiles
 	BallPlayer1 = 4,
 };
 
-class Algo {
+using namespace std;
+namespace Strategy {
 
-public:
-	Algo() {}
-	~Algo() {}
+	EXPORTCDECL int&  Algo_doActionNoobStrategy(Tiles* tiles, int size);
+	EXPORTCDECL void doActionStartingStrategy(Tiles* tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
+	EXPORTCDECL void doActionProgressiveStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
 
-	// You can change the return type and the parameters according to your needs.
-	void Algo::doActionNoobStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
+	void MovePieceNoobStrategy(Tiles* tiles, int size, int*& tab);
+	int GetRandomMoveAmongPossible(Tiles*(&tiles), int& sideSize, int& const indexOfMyPieceToMove);
 };
-
-
-#define EXPORTCDECL extern "C" __declspec(dllexport)
-//
-// export all C++ class/methods as friendly C functions to be consumed by external component in a portable way
-///
-
-EXPORTCDECL void Algo_doActionNoobStrategy(Algo* algo, Tiles** tiles, int size,  EnumCommand returnedMove[2], int prevX[], int prevY[], int nextX[], int nextY[]) {
-	return algo->doActionNoobStrategy(tiles, size, returnedMove,  prevX, prevY, nextX, nextY);
-}
-
-EXPORTCDECL Algo* Algo_new() {
-	return new Algo();
-}
-
-EXPORTCDECL void Algo_delete(Algo* algo) {
-	delete algo;
-}

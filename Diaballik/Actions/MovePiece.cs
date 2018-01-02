@@ -35,7 +35,7 @@ namespace Diaballik
             if (PrevX == -1 && PrevY == -1) return true; // Initialisation du Board
             if (g.Board.Tiles[NextX, NextY]== Tiles.Default)
             {
-                if ((Math.Abs(NextX-PrevX)==1 && PrevY == NextX)||(Math.Abs(NextY-PrevY)==1 && PrevX == NextX))
+                if ((Math.Abs(NextX-PrevX)==1 && PrevY == NextY)||(Math.Abs(NextY-PrevY)==1 && PrevX == NextX))
                 {
                     return true;
                 }

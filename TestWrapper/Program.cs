@@ -16,6 +16,7 @@ namespace TestWrapper
                 Game g = StandardBuilder.Create().SetBoard(3).SetPlayer1(p1).SetPlayer0(p0).Build();
                 
                 algo.PlayOneAction(g);
+
                 Console.WriteLine(g.CommandHistory.Peek().GetCommand().GetType());
                 Console.ReadLine();
             }

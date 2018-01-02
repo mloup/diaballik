@@ -1,2 +1,6 @@
 ﻿  Algo.cpp
+c:\users\pierre\documents\diaballik\libcpp\algo.h(29): warning C4227: anachronisme utilisé : qualificateurs de référence ignorés
+c:\users\pierre\documents\diaballik\libcpp\algo.cpp(35): warning C4102: 'Default' : étiquette non référencée
+c:\users\pierre\documents\diaballik\libcpp\algo.cpp(45): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+c:\users\pierre\documents\diaballik\libcpp\algo.cpp(111): warning C4227: anachronisme utilisé : qualificateurs de référence ignorés
   libCPPP.vcxproj -> C:\Users\Pierre\Documents\diaballik\Debug\libCPP.dll

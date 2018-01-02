@@ -12,10 +12,10 @@ namespace Diaballik
 
         public enum EnumCommand
         {
-            Default = 0,
-            MovePiece = 1,
-            MoveBall = 2,
-            EndTurn = 3
+            Default = -1,
+            MovePiece = 0,
+            MoveBall = 1,
+            EndTurn = 2
         };
 
         /// <summary>

@@ -6,81 +6,69 @@ using System.Runtime.InteropServices;
 
 namespace Diaballik
 {
-    public class NoobStrategy : IAStrategy, IDisposable
+    public class NoobStrategy : IAStrategy
     {
-        public NoobStrategy()
-        {
-            AlgoPtr = Algo_new();
-        }
-
-        ~NoobStrategy()
-        {
-            Dispose(true);
-            Algo_delete(AlgoPtr);
-        }
 
         public override void PlayOneAction(Game g)
         {
-            var returnedMove = new EnumCommand[1];
-            int[] prevX = new int[1];
-            int[] prevY = new int[1];
-            int[] nextX = new int[1];
-            int[] nextY = new int[1];
+            EnumCommand actionType;
+            int prevX, prevY, nextX , nextY;
 
-            //Convert MutliDim Enum Array to MultiDim Int Array
-            Tiles[,] enumArray = g.Board.Tiles;
-            int sizeArray = enumArray.GetLength(0);
-            var intArray = new int[sizeArray, sizeArray];
-            Array.Copy(enumArray, intArray, enumArray.Length);
 
-            Algo_doActionNoobStrategy(AlgoPtr, intArray , sizeArray, returnedMove, prevX, prevY, nextX, nextY);
+            //Convert MutliDim Enum Array to 1-Dim Int Array
+            var intArray = GetIntArray(g.Board.Tiles);
+            int nbTiles = g.Board.Tiles.Length;
 
-            switch (returnedMove[0])
+            IntPtr actionPtr = Algo_doActionNoobStrategy(intArray, nbTiles);
+            actionType = (EnumCommand) Marshal.ReadIntPtr(actionPtr);
+            prevX = (int) Marshal.ReadIntPtr(actionPtr+4);
+            prevY = (int) Marshal.ReadIntPtr(actionPtr+8);
+            nextX = (int) Marshal.ReadIntPtr(actionPtr+12);
+            nextY = (int) Marshal.ReadIntPtr(actionPtr+16);
+
+            Console.WriteLine("Voici le résultat du test = " + actionType + " " + prevX + " " + prevY + " " + nextX + " " + nextY); // YAAATAAAAA !
+            Console.Read();
+
+            switch (actionType)
             {
                 case EnumCommand.MovePiece:
-                    Command movePieceCmd = new MovePiece(prevX[0], prevY[0], nextX[0], nextY[0]);
-                    Console.Write("test MovePiece\n");
+                    Command movePieceCmd = new MovePiece(prevX, prevY, nextX, nextY);
+                    Console.Write("MovePiece\n");
                     movePieceCmd.Do(g);
                     break;
                 case EnumCommand.MoveBall:
-                    Command moveBallCmd = new MoveBall(prevX[0], prevY[0], nextX[0], nextY[0]);
-                    Console.Write("test MoveBall\n");
+                    Command moveBallCmd = new MoveBall(prevX, prevY, nextX, nextY);
+                    Console.Write("MoveBall\n");
                     moveBallCmd.Do(g);
                     break;
                 case EnumCommand.EndTurn:
-                    Command endTurnCmd = new EndTurn(prevX[0]);
-                    Console.Write("test EndTurn\n");
+                    Command endTurnCmd = new EndTurn(prevX);
+                    Console.Write("EndTurn\n");
                     endTurnCmd.Do(g);
                     break;
             }
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
 
-        protected virtual void Dispose(bool disposing)
+
+        private int[] GetIntArray(Tiles[,] tiles)
         {
-            if (Disposed)
-                return;
-            if (disposing)
+            int i = 0;
+            int nbTiles = tiles.Length;
+            int[] intArray = new int[nbTiles];
+            for (int k = 0; k < Math.Sqrt(nbTiles); k++)
             {
-                Algo_delete(AlgoPtr);
+                for (int j = 0; j < Math.Sqrt(nbTiles); j++)
+                {
+                    intArray[i] = (int) tiles[k, j];
+                    i++;
+                }
             }
-            Disposed = true;
+            return intArray;
         }
 
 
-
         [DllImport("libCPP.dll", CallingConvention = CallingConvention.Cdecl)]
-        extern static void Algo_doActionNoobStrategy(IntPtr algoPtr, int[,] tiles, int sizeArray, EnumCommand[] returnedMove, int[] prevX, int[] prevY, int[] nextX, int[] nextY);
-
-        [DllImport("libCPP.dll", CallingConvention = CallingConvention.Cdecl)]
-        extern static IntPtr Algo_new();
-
-        [DllImport("libCPP.dll", CallingConvention = CallingConvention.Cdecl)]
-        extern static IntPtr Algo_delete(IntPtr algoPtr);
+        public extern static IntPtr Algo_doActionNoobStrategy(int[] tiles, int size);
     }
 }

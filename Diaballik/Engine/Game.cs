@@ -85,6 +85,7 @@ namespace Diaballik
         {
             CurrentPlayer = nextPlayer;
             ActionCount = 0;
+            EndTurnClicked = false;
         }
 
         public void MovePiece(int x1, int y1, int x2, int y2)
@@ -126,23 +127,6 @@ namespace Diaballik
                 Board.Tiles[x2, y2] = Board.Tiles[x1, y1];
                 Board.Tiles[x1, y1] = temp;
                 ActionCount++;
-            }
-        }
-
-        /// <summary>
-        /// Création d'un nouveau tour
-        /// </summary>
-        public void NewTurn()
-        {
-            CurrentPlayer = (CurrentPlayer == 0) ? 1 : 0;
-            //CurrentActions.CommandList.Clear();
-            EndTurnClicked = false;
-
-            while (EndTurnClicked != true && !IsEndTurn())
-            {
-                
-
-                
             }
         }
 

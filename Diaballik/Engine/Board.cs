@@ -54,7 +54,7 @@ namespace Diaballik
 
         ~Board()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void GetPossibleMoves(int x, int y)
