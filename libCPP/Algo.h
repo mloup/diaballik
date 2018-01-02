@@ -26,5 +26,9 @@ namespace Strategy {
 	//EXPORTCDECL void doActionProgressiveStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
 
 	void MovePieceNoobStrategy(const Tiles*& tiles, const int& nbTiles, int*& actionResult);
-	int GetRandomMoveAmongPossible(const Tiles*(&tiles), const int& sideSize, int& const indexOfMyPieceToMove);
+	void MoveBallNoobStrategy(const Tiles*& tiles, const int& nbTiles, int*& actionResult);
+
+	int GetRandomMoveAmongPossible(const Tiles*(&tiles), const int& sideSize, int& const indexOfPieceToMove);
+	int GetBallIndex(const Tiles*& tiles, const int& nbTiles);
+	int GetPieceIndex(const Tiles*& tiles, const int& nbTiles, const int& pieceID);
 };

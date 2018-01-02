@@ -23,11 +23,7 @@ namespace Strategy {
 			break;
 
 		case MoveBall:
-			actionResult[1] = 2;
-			actionResult[2] = 1;
-			actionResult[3] = 1;
-			actionResult[4] = 1;
-			//MoveBallNoobStrategy(tiles, nbTiles, actionResult);
+			MoveBallNoobStrategy(tiles, nbTiles, actionResult);
 			break;
 
 		case EndTurn:
@@ -38,7 +34,7 @@ namespace Strategy {
 			break;
 
 		Default :
-			printf("Problème !");
+			throw exception("L'action doit être de type EndTurn ou MoveBall ou MovePiece");
 		}
 
 		return *actionResult;
@@ -47,42 +43,35 @@ namespace Strategy {
 
 
 	void MovePieceNoobStrategy(const Tiles*& tiles, const int& nbTiles, int*& actionResult){
-		int sideSize = (int) sqrt(nbTiles);
+		int sideSize = (int) sqrt(nbTiles);						// sideSize = nb Tiles par côté du Board
 		int randomPieceToSelect = (rand() % (sideSize - 1));	// Selection aléatoire d'une des (sideSize - 1) pièces (ne portant pas la balle) de l'IA
 
-		int count = 0;
-		int oldIndex;
-		int prevX, prevY, nextX, nextY;						// Paramètre de la commande à executer
+		int pieceIndex = GetPieceIndex(tiles, nbTiles, randomPieceToSelect);
 		
-		printf("RandomPieceToSelect = %i \n", randomPieceToSelect);
+		//printf("RandomPieceToSelect = %i \n", randomPieceToSelect);
 
-
-		for (int i = 0; i < nbTiles; i++) {
-			// printf("%i \n", (int)tiles[i]);
-			if (tiles[i] == (int)PiecePlayer1) {
-				if (count == randomPieceToSelect) {
-					oldIndex = i;
-					break;
-				}
-				count++;
-			}
-		}
-
-
-		prevX = (int) oldIndex / sideSize;
-		prevY = oldIndex % sideSize;
-
+		
 		//printf("Selection de la piece : X = %i  et  Y = %i \n", prevX, prevY);
+		int newIndex = GetRandomMoveAmongPossible(tiles, sideSize, pieceIndex);
 
-		int newIndex = GetRandomMoveAmongPossible(tiles, sideSize, oldIndex);
+		actionResult[1] = (int)pieceIndex / sideSize;		// prevX
+		actionResult[2] = pieceIndex % sideSize;			// prevY
+		actionResult[3] = (int)newIndex / sideSize;			// nextX
+		actionResult[4] = newIndex % sideSize;				// nextY
+	}
 
-		nextX = (int) newIndex / sideSize;
-		nextY = newIndex % sideSize;
+	void MoveBallNoobStrategy(const Tiles*& tiles, const int& nbTiles, int*& actionResult) {
+		int sideSize = (int)sqrt(nbTiles);	 // sideSize = nb Tiles par côté du Board
+		int ballIndex = GetBallIndex(tiles, nbTiles);
+		if (ballIndex == -1) throw exception("Index de la balle non valide !");
 
-		actionResult[1] = prevX;
-		actionResult[2] = prevY;
-		actionResult[3] = nextX;
-		actionResult[4] = nextY;
+		int newBallIndex = GetRandomMoveAmongPossible(tiles, sideSize, ballIndex);
+
+		actionResult[1] = (int)ballIndex / sideSize;		// prevX
+		actionResult[2] = ballIndex % sideSize;			// prevY
+		actionResult[3] = (int)newBallIndex / sideSize;		// nextX
+		actionResult[4] = newBallIndex % sideSize;			// nextY
+
 	}
 
 	int GetRandomMoveAmongPossible(const Tiles*(&tiles), const int& sideSize, int& const oldIndex) {
@@ -100,54 +89,40 @@ namespace Strategy {
 		}
 
 		switch(randomMoveAmongPossible) {
-		case 0:
+		case 0: // MoveUp
 			return oldIndex - 1;
-		case 1:
+		case 1: // MoveDown
 			return oldIndex + 1;
-		case 2:
+		case 2: // MoveLeft
 			return oldIndex - sideSize;
-		case 3:
+		case 3: // MoveRight
 			return oldIndex + sideSize;
 		}
 	}
 
-
-
-
-
-
-
-	void doActionStartingStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[])
-	{
-		//returnedMove = (EnumCommand)(rand() % 3); mis commentaire pour effectuer les tests
-		returnedMove[0] = MovePiece;
-		switch (returnedMove[0])
-		{
-		case MovePiece:
-			break;
-
-		case MoveBall:
-			break;
-
-		case EndTurn:
-			break;
+	int GetBallIndex(const Tiles*& tiles, const int& nbTiles) {
+		int res = -1;
+		for (int i = 0; i < nbTiles; i++) {
+			if (tiles[i] == BallPlayer1) {
+				res = i;
+				break;
+			}
 		}
+		return res;
 	}
 
-	void doActionProgressiveStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[])
-	{
-		//returnedMove = (EnumCommand)(rand() % 3); mis commentaire pour effectuer les tests
-		returnedMove[0] = MovePiece;
-		switch (returnedMove[0])
-		{
-		case MovePiece:
-			break;
-
-		case MoveBall:
-			break;
-
-		case EndTurn:
-			break;
+	int GetPieceIndex(const Tiles*& tiles, const int& nbTiles, const int& pieceID) {
+		int pieceCount = 0 , res;
+		for (int i = 0; i < nbTiles; i++) {
+			if (tiles[i] == (int)PiecePlayer1) {
+				if (pieceCount == pieceID) {
+					res = i;
+					break;
+				}
+				pieceCount++;
+			}
 		}
+		return res;
 	}
+
 }

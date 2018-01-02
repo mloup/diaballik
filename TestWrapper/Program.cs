@@ -13,7 +13,7 @@ namespace TestWrapper
                 var algo = new NoobStrategy();
                 Player p1 = new IAPlayer("Pierre", "noir", algo);
 
-                Game g = StandardBuilder.Create().SetBoard(3).SetPlayer1(p1).SetPlayer0(p0).Build();
+                Game g = StandardBuilder.Create().SetBoard(7).SetPlayer1(p1).SetPlayer0(p0).Build();
                 
                 algo.PlayOneAction(g);
 
