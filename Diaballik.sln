@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWrapper", "TestWrapper\
 		{81E670FE-8518-4C71-B28D-D3D6AC90C790} = {81E670FE-8518-4C71-B28D-D3D6AC90C790}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaballikWPF", "WpfApp1\DiaballikWPF.csproj", "{7BC29830-1B2B-41C7-8A13-549A2D4AE978}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFDiaballik", "WPFDiaballik\WPFDiaballik.csproj", "{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,22 @@ Global
 		{9EDC1B31-95BC-4E60-A9E6-797CED3AE95C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9EDC1B31-95BC-4E60-A9E6-797CED3AE95C}.Release|x86.ActiveCfg = Release|Any CPU
 		{9EDC1B31-95BC-4E60-A9E6-797CED3AE95C}.Release|x86.Build.0 = Release|Any CPU
+		{7BC29830-1B2B-41C7-8A13-549A2D4AE978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BC29830-1B2B-41C7-8A13-549A2D4AE978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BC29830-1B2B-41C7-8A13-549A2D4AE978}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7BC29830-1B2B-41C7-8A13-549A2D4AE978}.Debug|x86.Build.0 = Debug|Any CPU
+		{7BC29830-1B2B-41C7-8A13-549A2D4AE978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BC29830-1B2B-41C7-8A13-549A2D4AE978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BC29830-1B2B-41C7-8A13-549A2D4AE978}.Release|x86.ActiveCfg = Release|Any CPU
+		{7BC29830-1B2B-41C7-8A13-549A2D4AE978}.Release|x86.Build.0 = Release|Any CPU
+		{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}.Debug|x86.Build.0 = Debug|Any CPU
+		{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}.Release|x86.ActiveCfg = Release|Any CPU
+		{D46665B6-C818-4C1A-8A65-B0E2BA32FA56}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

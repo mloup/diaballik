@@ -70,6 +70,7 @@ namespace Diaballik
         /// </summary>
         public void NextMove()
         {
+            throw new System.NotImplementedException();
             //Command cmd = CommandHistory;
         }
 
@@ -102,9 +103,19 @@ namespace Diaballik
             }
             else // Cas Normal
             {
-                Board.Tiles[x2, y2] = Board.Tiles[x1, y1];
-                Board.Tiles[x1, y1] = Tiles.Default;
-                ActionCount++;
+                if (Board.Tiles[x1, y1] == Tiles.PiecePlayer0 || Board.Tiles[x1, y1] == Tiles.PiecePlayer1)
+                {
+                    Board.Tiles[x2, y2] = Board.Tiles[x1, y1];
+                    Board.Tiles[x1, y1] = Tiles.Default;
+                    ActionCount++;
+                    if (ActionCount == 3)
+                    {
+                        int nextPlayer = (CurrentPlayer == 0) ? 1 : 0;
+                        Command endTurn = new EndTurn(nextPlayer);
+                        endTurn.Do(this);
+                    }
+                }
+                else throw new ArgumentException("Game.MovePiece() : il n'y a pas de Piece à la position (" + x1 + "," + x2 + ").");
             }
         }
 
@@ -127,6 +138,12 @@ namespace Diaballik
                 Board.Tiles[x2, y2] = Board.Tiles[x1, y1];
                 Board.Tiles[x1, y1] = temp;
                 ActionCount++;
+                if (ActionCount == 3)
+                {
+                    int nextPlayer = (CurrentPlayer == 0) ? 1 : 0;
+                    Command endTurn = new EndTurn(nextPlayer);
+                    endTurn.Do(this);
+                }
             }
         }
 

@@ -37,7 +37,7 @@ namespace DiaballikTest
             Assert.IsFalse(gb.MyGameToBuild.EndTurnClicked);
             Assert.IsTrue(gb.MyGameToBuild.GameHasIA);
             Assert.IsFalse(gb.MyGameToBuild.Finished);
-            //Assert.IsTrue(gb.MyGameToBuild.CurrentPlayer == 0 || gb.MyGameToBuild.CurrentPlayer == 1);
+            Assert.IsTrue(gb.MyGameToBuild.CurrentPlayer == 0 || gb.MyGameToBuild.CurrentPlayer == 1);
             Assert.AreEqual(pl0, gb.MyGameToBuild.Players[0]);
             Assert.AreEqual(plIA, gb.MyGameToBuild.Players[1]);
         }
@@ -49,6 +49,7 @@ namespace DiaballikTest
         {
             gb = new StandardBuilder();
             game = gb.SetBoard(nbtiles).SetPlayer0(pl0).SetPlayer1(pl1).Build();
+
             Tiles[,] tiles = {  { Tiles.PiecePlayer0, Tiles.BallPlayer0, Tiles.PiecePlayer0 },
                                 { Tiles.Default, Tiles.Default, Tiles.Default },
                                 { Tiles.PiecePlayer1, Tiles.BallPlayer1, Tiles.PiecePlayer1 } };
@@ -57,17 +58,18 @@ namespace DiaballikTest
             Assert.IsFalse(gb.MyGameToBuild.EndTurnClicked);
             Assert.IsFalse(gb.MyGameToBuild.GameHasIA);
             Assert.IsFalse(gb.MyGameToBuild.Finished);
-            /*
-            for (int i = 0; i < (int) Math.Sqrt(gb.MyGameToBuild.Board.Tiles.Length); i++)
+            Assert.IsTrue(gb.MyGameToBuild.CurrentPlayer == 0 || gb.MyGameToBuild.CurrentPlayer == 1);
+            Assert.AreEqual(pl0, gb.MyGameToBuild.Players[0]);
+            Assert.AreEqual(pl1, gb.MyGameToBuild.Players[1]);
+
+
+            for (int i = 0; i < (int)Math.Sqrt(gb.MyGameToBuild.Board.Tiles.Length); i++)
             {
                 for (int j = 0; j < (int)Math.Sqrt(gb.MyGameToBuild.Board.Tiles.Length); j++)
                 {
-                    Assert.AreEqual(tiles[i,j], gb.MyGameToBuild.Board.Tiles[i,j]);
+                    Assert.AreEqual(tiles[i, j], gb.MyGameToBuild.Board.Tiles[i, j]);
                 }
-            }*/
-            //Assert.IsTrue(gb.MyGameToBuild.CurrentPlayer == 0 || gb.MyGameToBuild.CurrentPlayer == 1);
-            Assert.AreEqual(pl0, gb.MyGameToBuild.Players[0]);
-            Assert.AreEqual(pl1, gb.MyGameToBuild.Players[1]);
+            }
         }
     }
 }
