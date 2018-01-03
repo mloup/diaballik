@@ -17,9 +17,9 @@ namespace Diaballik
 
         }
 
-        public static GameBuilder Create()
+        public static StandardBuilder Create()
         {
-            GameBuilder builderGame = new StandardBuilder();
+            StandardBuilder builderGame = new StandardBuilder();
             return builderGame;
         }
 

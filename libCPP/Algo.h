@@ -2,13 +2,6 @@
 
 #define EXPORTCDECL extern "C" __declspec(dllexport)
 
-enum EnumCommand
-{
-	MovePiece = 0,
-	MoveBall = 1,
-	EndTurn = 2
-};
-
 enum Tiles
 {
 	DefTiles = 0,
@@ -21,14 +14,12 @@ enum Tiles
 using namespace std;
 namespace Strategy {
 
-	EXPORTCDECL int&  Algo_doActionNoobStrategy(const Tiles* tiles, const int  nbTiles);
-	//EXPORTCDECL void doActionStartingStrategy(Tiles* tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
-	//EXPORTCDECL void doActionProgressiveStrategy(Tiles** tiles, int size, EnumCommand returnedMove[], int prevX[], int prevY[], int nextX[], int nextY[]);
+	EXPORTCDECL int&  Algo_MovePieceNoobStrategy(const Tiles* tiles, const int nbTiles);
+	EXPORTCDECL int&  Algo_MoveBallNoobStrategy(const Tiles* tiles, const int nbTiles);
 
-	void MovePieceNoobStrategy(const Tiles*& tiles, const int& nbTiles, int*& actionResult);
-	void MoveBallNoobStrategy(const Tiles*& tiles, const int& nbTiles, int*& actionResult);
-
-	int GetRandomMoveAmongPossible(const Tiles*(&tiles), const int& sideSize, int& const indexOfPieceToMove);
+	int GetRandomMovePieceAmongPossible(const Tiles*(&tiles), const int& sideSize, const int& indexOfPieceToMove);
+	int GetRandomMoveBallAmongPossible(const Tiles*(&tiles), const int& sideSize, const int& indexOfPieceToMove);
 	int GetBallIndex(const Tiles*& tiles, const int& nbTiles);
 	int GetPieceIndex(const Tiles*& tiles, const int& nbTiles, const int& pieceID);
+	int* GetAllPieceIndex(const Tiles*& tiles, const int& nbTiles);
 };

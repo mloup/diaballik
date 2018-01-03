@@ -7,8 +7,10 @@ namespace Diaballik
 {
     public abstract class IAStrategy
     {
-        public IntPtr AlgoPtr { get; set; }
-        public bool Disposed { get; set; }
+
+        public IAStrategy()
+        {
+        }
 
         public enum EnumCommand
         {

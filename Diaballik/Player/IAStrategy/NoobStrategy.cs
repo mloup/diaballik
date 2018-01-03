@@ -8,44 +8,62 @@ namespace Diaballik
 {
     public class NoobStrategy : IAStrategy
     {
-
         public override void PlayOneAction(Game g)
         {
-            EnumCommand actionType;
-            int prevX, prevY, nextX , nextY;
-
+            int prevX = 1, prevY = -1, nextX = -1, nextY = -1;
+            bool isActionValid = false;
 
             //Convert MutliDim Enum Array to 1-Dim Int Array
             int[] intArray = GetIntArray(g.Board.Tiles);
             int nbTiles = g.Board.Tiles.Length;
 
-            IntPtr actionPtr = Algo_doActionNoobStrategy(intArray, nbTiles);
-            actionType = (EnumCommand) Marshal.ReadIntPtr(actionPtr);
-            prevX = (int) Marshal.ReadIntPtr(actionPtr+4);
-            prevY = (int) Marshal.ReadIntPtr(actionPtr+8);
-            nextX = (int) Marshal.ReadIntPtr(actionPtr+12);
-            nextY = (int) Marshal.ReadIntPtr(actionPtr+16);
-
-            Console.WriteLine("Voici le résultat du test = " + actionType + " " + prevX + " " + prevY + " " + nextX + " " + nextY); // YAAATAAAAA !
-            Console.Read();
-
-            switch (actionType)
+            while (!isActionValid)
             {
-                case EnumCommand.MovePiece:
-                    Command movePieceCmd = new MovePiece(prevX, prevY, nextX, nextY);
-                    Console.Write("MovePiece\n");
-                    movePieceCmd.Do(g);
-                    break;
-                case EnumCommand.MoveBall:
-                    Command moveBallCmd = new MoveBall(prevX, prevY, nextX, nextY);
-                    Console.Write("MoveBall\n");
-                    moveBallCmd.Do(g);
-                    break;
-                case EnumCommand.EndTurn:
-                    Command endTurnCmd = new EndTurn(prevX);
-                    Console.Write("EndTurn\n");
-                    endTurnCmd.Do(g);
-                    break;
+                Random random = new Random();
+                int randomNumber = random.Next(0, 3);
+                switch (randomNumber)
+                {
+                    case 0: // MovePiece
+                        if (g.MovePieceCount < 2)
+                        {
+                            IntPtr actionMovePiecePtr = Algo_MovePieceNoobStrategy(intArray, nbTiles);
+                            prevX = (int)Marshal.ReadIntPtr(actionMovePiecePtr);
+                            prevY = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 4);
+                            nextX = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 8);
+                            nextY = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 12);
+
+                            Command movePieceCmd = new MovePiece(prevX, prevY, nextX, nextY);
+                            Console.Write("IA NoobStrategy moves a piece from (" + prevX + "," + prevY + ") to (" + nextX + "," + nextY + ")\n");
+                            movePieceCmd.Do(g);
+                            isActionValid = true;
+                        }
+                        break;
+
+                    case 1: // MoveBall
+                        if(g.MoveBallCount == 0)
+                        {
+                            IntPtr actionMoveBallPtr = Algo_MoveBallNoobStrategy(intArray, nbTiles);
+                            prevX = (int)Marshal.ReadIntPtr(actionMoveBallPtr);
+                            prevY = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 4);
+                            nextX = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 8);
+                            nextY = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 12);
+
+                            Command moveBallCmd = new MoveBall(prevX, prevY, nextX, nextY);
+                            if (nextX != -1 && nextY != -1)
+                            {
+                                Console.Write("IA NoobStrategy moves his ball from (" + prevX+","+prevY+") to ("+nextX+","+nextY+")\n");
+                                moveBallCmd.Do(g);
+                                isActionValid = true;
+                            }
+                        }
+                        break;
+
+                    case 2: // EndTurn
+                        Command endTurnCmd = new EndTurn(prevX);
+                        Console.Write("IA NoobStrategy EndTurn\n");
+                        endTurnCmd.Do(g);
+                        break;
+                }
             }
         }
 
@@ -67,8 +85,10 @@ namespace Diaballik
             return intArray;
         }
 
+        [DllImport("libCPP.dll", ExactSpelling = true, CallingConvention = CallingConvention.Cdecl)]
+        public extern static IntPtr Algo_MovePieceNoobStrategy(int[] tiles, int size);
 
-        [DllImport("libCPP.dll", CallingConvention = CallingConvention.Cdecl)]
-        public extern static IntPtr Algo_doActionNoobStrategy(int[] tiles, int size);
+        [DllImport("libCPP.dll", ExactSpelling = true, CallingConvention = CallingConvention.Cdecl)]
+        public extern static IntPtr Algo_MoveBallNoobStrategy(int[] tiles, int size);
     }
 }

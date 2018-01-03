@@ -17,14 +17,16 @@ namespace Diaballik
         public override void Do(Game g)
         {
             if (CanDo(g))
-            g.EndTurn(NextPlayer);
-            g.CommandHistory.Push(new CommandMemento(this));
-            g.UndoHistory.Clear();
+            {
+                g.EndTurn(NextPlayer);
+                g.CommandHistory.Push(new CommandMemento(this));
+                g.UndoHistory.Clear();
+            }
         }
         
         public override bool CanDo(Game g)
         {
-            return true;
+            return (g.MoveBallCount + g.MovePieceCount >= 1)? true : false; // Un joueur est obligé de faire au moins une action par tour
         }
 
         public override void Done()

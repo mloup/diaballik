@@ -33,6 +33,7 @@ namespace Diaballik
         public override bool CanDo(Game g)
         {
             if (PrevX == -1 && PrevY == -1) return true; // Initialisation du Board
+            if (g.MoveBallCount == 1) return false; // On ne peut bouger qu'une seule fois la balle par tour
             Tiles tile = g.Board.Tiles[PrevX, PrevY];
             bool okay = true;
             if (NextX == PrevX)
@@ -115,6 +116,10 @@ namespace Diaballik
             if (cmd.CanDo(g) && cmd is MoveBall)
             {
                 cmd.Do(g);
+            }
+            else
+            {
+                throw new ArgumentException("La dernière commande undo n'est pas de type MoveBall");
             }
         }
 

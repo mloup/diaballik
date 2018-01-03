@@ -10,11 +10,11 @@ namespace Diaballik
         public Stack<CommandMemento> CommandHistory { get; set; }
         public Stack<CommandMemento> UndoHistory { get; set; }
         public Diaballik.Player[] Players { get; set; }
-        public int ActionCount { get; set; }
+        public int MovePieceCount { get; set; }
+        public int MoveBallCount { get; set; }
         public int CurrentPlayer { get; set; }
-        public Boolean Finished { get; set; }
+        public bool Finished { get; set; }
         public bool GameHasIA { get; set; }
-        public bool EndTurnClicked { get; set; }
         public Board Board { get; set; }
 
         public Game()
@@ -22,8 +22,8 @@ namespace Diaballik
             Players = new Player[2];
             CommandHistory = new Stack<CommandMemento>();
             UndoHistory = new Stack<CommandMemento>();
-            ActionCount = 0;
-            EndTurnClicked = false;
+            MoveBallCount = 0;
+            MovePieceCount = 0;
             Finished = false;
             CurrentPlayer = new Random().Next(0, 2);
         }
@@ -38,7 +38,7 @@ namespace Diaballik
         /// </summary>
         public Boolean IsEndTurn()
         {
-            return (ActionCount >= 3);
+            return (MoveBallCount + MovePieceCount >= 3);
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace Diaballik
         public void EndTurn(int nextPlayer)
         {
             CurrentPlayer = nextPlayer;
-            ActionCount = 0;
-            EndTurnClicked = false;
+            MoveBallCount = 0;
+            MovePieceCount = 0;
         }
 
         public void MovePiece(int x1, int y1, int x2, int y2)
@@ -107,8 +107,8 @@ namespace Diaballik
                 {
                     Board.Tiles[x2, y2] = Board.Tiles[x1, y1];
                     Board.Tiles[x1, y1] = Tiles.Default;
-                    ActionCount++;
-                    if (ActionCount == 3)
+                    MovePieceCount++;
+                    if (MovePieceCount + MoveBallCount == 3)
                     {
                         int nextPlayer = (CurrentPlayer == 0) ? 1 : 0;
                         Command endTurn = new EndTurn(nextPlayer);
@@ -137,23 +137,14 @@ namespace Diaballik
                 Tiles temp = Board.Tiles[x2, y2];
                 Board.Tiles[x2, y2] = Board.Tiles[x1, y1];
                 Board.Tiles[x1, y1] = temp;
-                ActionCount++;
-                if (ActionCount == 3)
+                MoveBallCount++;
+                if (MovePieceCount + MoveBallCount == 3)
                 {
                     int nextPlayer = (CurrentPlayer == 0) ? 1 : 0;
                     Command endTurn = new EndTurn(nextPlayer);
                     endTurn.Do(this);
                 }
             }
-        }
-
-
-        /// <summary>
-        /// Triggered quand l'utilisateur veut passer son tour. Cette fonction passe la propriété endTurnClicked à true
-        /// </summary>
-        public void UserEndTurn()
-        {
-            EndTurnClicked = true;
-        }        
+        }   
     }
 }

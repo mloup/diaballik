@@ -34,7 +34,6 @@ namespace DiaballikTest
             game = gb.SetBoard(nbtiles).SetPlayer0(pl0).SetPlayer1(plIA).Build();
 
             Assert.AreEqual(nbtiles, gb.MyGameToBuild.Board.BoardSize);
-            Assert.IsFalse(gb.MyGameToBuild.EndTurnClicked);
             Assert.IsTrue(gb.MyGameToBuild.GameHasIA);
             Assert.IsFalse(gb.MyGameToBuild.Finished);
             Assert.IsTrue(gb.MyGameToBuild.CurrentPlayer == 0 || gb.MyGameToBuild.CurrentPlayer == 1);
@@ -55,7 +54,6 @@ namespace DiaballikTest
                                 { Tiles.PiecePlayer1, Tiles.BallPlayer1, Tiles.PiecePlayer1 } };
 
             Assert.AreEqual(nbtiles, gb.MyGameToBuild.Board.BoardSize);
-            Assert.IsFalse(gb.MyGameToBuild.EndTurnClicked);
             Assert.IsFalse(gb.MyGameToBuild.GameHasIA);
             Assert.IsFalse(gb.MyGameToBuild.Finished);
             Assert.IsTrue(gb.MyGameToBuild.CurrentPlayer == 0 || gb.MyGameToBuild.CurrentPlayer == 1);

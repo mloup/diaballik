@@ -20,32 +20,7 @@ namespace Diaballik
 
         public override void PlayOneAction(Game g)
         {
-            var returnedMove = new EnumCommand[1];
-            var returnedAttr = new int[4];
-
-            //Convert MutliDim Enum Array to MultiDim Int Array
-            Tiles[,] enumArray = g.Board.Tiles;
-            int sizeArray = enumArray.GetLength(0);
-            var intArray = new int[sizeArray, sizeArray];
-            Array.Copy(enumArray, intArray, enumArray.Length);
-
-            Algo_doActionStartingStrategy(AlgoPtr, intArray, sizeArray, returnedMove, returnedAttr);
-
-            switch (returnedMove[0])
-            {
-                case EnumCommand.MovePiece:
-                    Command movePieceCmd = new MovePiece(returnedAttr[0], returnedAttr[1], returnedAttr[2], returnedAttr[3]);
-                    movePieceCmd.Do(g);
-                    break;
-                case EnumCommand.MoveBall:
-                    Command moveBallCmd = new MoveBall(returnedAttr[0], returnedAttr[1], returnedAttr[2], returnedAttr[3]);
-                    moveBallCmd.Do(g);
-                    break;
-                case EnumCommand.EndTurn:
-                    Command endTurnCmd = new EndTurn(returnedAttr[0]);
-                    endTurnCmd.Do(g);
-                    break;
-            }
+            
         }
 
         [DllImport("libCPP.dll", CallingConvention = CallingConvention.Cdecl)]
