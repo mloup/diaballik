@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Diaballik.Actors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Diaballik
+namespace Diaballik.Engine
 {
     [Serializable]
     public class Game
     {
         public Stack<CommandMemento> CommandHistory { get; set; }
         public Stack<CommandMemento> UndoHistory { get; set; }
-        public Diaballik.Player[] Players { get; set; }
+        public Player[] Players { get; set; }
         public int MovePieceCount { get; set; }
         public int MoveBallCount { get; set; }
         public int CurrentPlayer { get; set; }
@@ -104,7 +105,7 @@ namespace Diaballik
                 CommandHistory.Push(new CommandMemento(mp));
                 UndoHistory.Clear();
 
-                Board.PrintBoard();
+                //Console.Write(Board.ToString());
 
                 if (MovePieceCount + MoveBallCount == 3 && x1 != -1 && x2 != -1)
                 {
@@ -153,7 +154,7 @@ namespace Diaballik
                 CommandHistory.Push(new CommandMemento(mb));
                 UndoHistory.Clear();
 
-                Board.PrintBoard();
+                //Console.Write(Board.ToString());
 
                 if (MovePieceCount + MoveBallCount == 3 && x1 != -1 && x2 != -1)
                 {
@@ -162,6 +163,30 @@ namespace Diaballik
                 }
             }
             else throw new InvalidOperationException("Impossible d'effectuer l'action MoveBall (" + x1 + "," + x2 + "). \n");
+        }
+
+        public override String ToString()
+        {
+            string res = "Trace Jeu:\n";
+            res += "\tEtat de la partie: " + ((IsWin())? "partie terminée": "partie non terminée") + "\n";
+            res += Board.ToString();
+            res += "\tJoueurs 0: " + Players[0].ToString();
+            res += "\tJoueurs 1: " + Players[1].ToString();
+            res += "\tJoueur Courant: " + CurrentPlayer + "\n";
+            res += "\tMovePieceCount: " + MovePieceCount + "\n";
+            res += "\tMoveBallCount: " + MoveBallCount + "\n";
+            res += "\tActions stockées : \n";
+            if (CommandHistory.Count == 0)
+                res += "\t\tPas d'actions.\n";
+            else
+            {
+                foreach (CommandMemento command in CommandHistory)
+                {
+                    res += command.GetCommand().ToString();
+                }
+            }
+            res += "Fin trace Jeu\n";
+            return res;
         }
     }
 }

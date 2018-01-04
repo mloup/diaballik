@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Diaballik
+namespace Diaballik.Engine
 {
+    [Serializable]
     public enum Tiles
     {
         Default = 0,
@@ -14,7 +15,7 @@ namespace Diaballik
         BallPlayer1 = 4,
     };
 
-
+    [Serializable]
     public class Board
     {
         public Tiles[,] Tiles { get; set; }
@@ -57,18 +58,20 @@ namespace Diaballik
             
         }
 
-        public void PrintBoard()
+        public override String ToString()
         {
-            Console.Write("Etat du board : \n");
+            String res;
+            res = "\tEtat du board: \n";
             for (int i = 0 ; i < BoardSize; i++)
             {
+                res += "\t\t";
                 for (int j = 0; j < BoardSize; j++)
                 {
-                    Console.Write((int) Tiles[j, i] + " ");
+                    res += (int) Tiles[j, i] + " ";
                 }
-                Console.Write("\n");
+               res += "\n";
             }
-            Console.Write("\n");
+            return res;
         }
     }
 }

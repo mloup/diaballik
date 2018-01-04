@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Diaballik
 {
+    [Serializable]
     public class CommandMemento
     {
         private Command _cmd;

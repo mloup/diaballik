@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Diaballik.Engine.Builder;
+using Diaballik.Engine;
 
 namespace Diaballik.Tests
 {

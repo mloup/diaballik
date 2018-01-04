@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Diaballik.Engine;
+using Diaballik.Engine.Builder;
+using Diaballik.Actors;
 
 namespace Diaballik.Tests
 {
@@ -40,8 +43,9 @@ namespace Diaballik.Tests
         [TestMethod()]
         public void DoTest()
         {
-            int nextPlayer = game.CurrentPlayer;
+            game.MovePieceCount = 1; // simulation d'un MovePiece afin d'executer la commande endTurn
             endTurn.Do();
+            int nextPlayer = game.CurrentPlayer;
             if (previousPlayer == 1)
             {
                 Assert.IsTrue(nextPlayer == 0);
@@ -62,12 +66,6 @@ namespace Diaballik.Tests
         public void CanDoTest2()
         {
             Assert.IsFalse(endTurn.CanDo());
-        }
-
-        [TestMethod()]
-        public void RedoTest()
-        {
-
         }
 
         [TestMethod]

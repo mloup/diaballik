@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Diaballik
 {
+    [Serializable]
     public abstract class Command
     {
         public int PrevX { get; set; }
@@ -21,6 +22,14 @@ namespace Diaballik
         public Command Clone()
         {
             return MemberwiseClone() as Command;
+        }
+
+        public override String ToString()
+        {
+            String res ="";
+            if (this is EndTurn) res += "\t\tEndTurn\n";
+            else res += "\t\t" + this.GetType() + " : from(" + PrevX + ", " + PrevY + ") to (" + NextX + ", " + NextY + ")\n";
+            return res;
         }
     }
 }

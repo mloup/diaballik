@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Diaballik.Actors;
+using System;
 using System.Collections.Generic;
 
-namespace Diaballik
+namespace Diaballik.Engine.Builder
 {
     public abstract class GameBuilder
     {
