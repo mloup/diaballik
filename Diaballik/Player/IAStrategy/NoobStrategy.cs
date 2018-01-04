@@ -10,61 +10,64 @@ namespace Diaballik
     {
         public override void PlayOneAction(Game g)
         {
-            int prevX = 1, prevY = -1, nextX = -1, nextY = -1;
-            bool isActionValid = false;
-
-            //Convert MutliDim Enum Array to 1-Dim Int Array
-            int[] intArray = GetIntArray(g.Board.Tiles);
-            int nbTiles = g.Board.Tiles.Length;
-
-            while (!isActionValid)
+            if (g.CurrentPlayer == 1)
             {
-                Random random = new Random();
-                int randomNumber = random.Next(0, 3);
-                switch (randomNumber)
+                int prevX = 1, prevY = -1, nextX = -1, nextY = -1;
+                bool isActionValid = false;
+
+                //Convert MutliDim Enum Array to 1-Dim Int Array
+                int[] intArray = GetIntArray(g.Board.Tiles);
+                int nbTiles = g.Board.Tiles.Length;
+
+                while (!isActionValid)
                 {
-                    case 0: // MovePiece
-                        if (g.MovePieceCount < 2)
-                        {
-                            IntPtr actionMovePiecePtr = Algo_MovePieceNoobStrategy(intArray, nbTiles);
-                            prevX = (int)Marshal.ReadIntPtr(actionMovePiecePtr);
-                            prevY = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 4);
-                            nextX = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 8);
-                            nextY = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 12);
-
-                            Command movePieceCmd = new MovePiece(prevX, prevY, nextX, nextY);
-                            Console.Write("IA NoobStrategy moves a piece from (" + prevX + "," + prevY + ") to (" + nextX + "," + nextY + ")\n");
-                            movePieceCmd.Do(g);
-                            isActionValid = true;
-                        }
-                        break;
-
-                    case 1: // MoveBall
-                        if(g.MoveBallCount == 0)
-                        {
-                            IntPtr actionMoveBallPtr = Algo_MoveBallNoobStrategy(intArray, nbTiles);
-                            prevX = (int)Marshal.ReadIntPtr(actionMoveBallPtr);
-                            prevY = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 4);
-                            nextX = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 8);
-                            nextY = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 12);
-
-                            Command moveBallCmd = new MoveBall(prevX, prevY, nextX, nextY);
-                            if (nextX != -1 && nextY != -1)
+                    Random random = new Random();
+                    int randomNumber = random.Next(0, 3);
+                    switch (randomNumber)
+                    {
+                        case 0: // MovePiece
+                            if (g.MovePieceCount < 2)
                             {
-                                Console.Write("IA NoobStrategy moves his ball from (" + prevX+","+prevY+") to ("+nextX+","+nextY+")\n");
-                                moveBallCmd.Do(g);
+                                IntPtr actionMovePiecePtr = Algo_MovePieceNoobStrategy(intArray, nbTiles);
+                                prevX = (int)Marshal.ReadIntPtr(actionMovePiecePtr);
+                                prevY = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 4);
+                                nextX = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 8);
+                                nextY = (int)Marshal.ReadIntPtr(actionMovePiecePtr + 12);
+
+                                Console.Write("IA NoobStrategy moves a piece from (" + prevX + "," + prevY + ") to (" + nextX + "," + nextY + ")\n");
+                                g.MovePiece(prevX, prevY, nextX, nextY);
                                 isActionValid = true;
                             }
-                        }
-                        break;
+                            break;
 
-                    case 2: // EndTurn
-                        Command endTurnCmd = new EndTurn(prevX);
-                        Console.Write("IA NoobStrategy EndTurn\n");
-                        endTurnCmd.Do(g);
-                        break;
+                        case 1: // MoveBall
+                            if (g.MoveBallCount == 0)
+                            {
+                                IntPtr actionMoveBallPtr = Algo_MoveBallNoobStrategy(intArray, nbTiles);
+                                prevX = (int)Marshal.ReadIntPtr(actionMoveBallPtr);
+                                prevY = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 4);
+                                nextX = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 8);
+                                nextY = (int)Marshal.ReadIntPtr(actionMoveBallPtr + 12);
+
+
+                                if (nextX != -1 && nextY != -1)
+                                {
+                                    Console.Write("IA NoobStrategy moves his ball from (" + prevX + "," + prevY + ") to (" + nextX + "," + nextY + ")\n");
+                                    g.MoveBall(prevX, prevY, nextX, nextY);
+                                    isActionValid = true;
+                                }
+                            }
+                            break;
+
+                        case 2: // EndTurn
+                            Command endTurnCmd = new EndTurn(g);
+                            //Console.Write("IA NoobStrategy EndTurn\n");
+                            endTurnCmd.Do();
+                            break;
+                    }
                 }
             }
+            else throw new InvalidOperationException("L'IA n'est plus le joueur courant !");
         }
 
 

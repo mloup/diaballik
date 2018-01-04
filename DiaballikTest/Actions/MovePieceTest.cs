@@ -15,8 +15,8 @@ namespace Diaballik.Tests
         public void InitTests()
         {
             Game g = new StandardBuilder().SetBoard(3).Build();
-            MovePiece commandMove = new MovePiece(0, 0, 0, 1);
-            commandMove.Do(g);
+            MovePiece commandMove = new MovePiece(0, 0, 0, 1, g.Board);
+            commandMove.Do();
             Tiles[,] expectedTiles = {  { Tiles.Default, Tiles.BallPlayer0, Tiles.PiecePlayer0 },
                                 { Tiles.PiecePlayer0, Tiles.Default, Tiles.Default },
                                 { Tiles.PiecePlayer1, Tiles.BallPlayer1, Tiles.PiecePlayer1 } };

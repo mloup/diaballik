@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Diaballik
 {
+    [Serializable]
     public class Game
     {
         public Stack<CommandMemento> CommandHistory { get; set; }
@@ -82,69 +83,85 @@ namespace Diaballik
             throw new System.NotImplementedException();
         }
 
-        public void EndTurn(int nextPlayer)
+        public void EndTurn()
         {
-            CurrentPlayer = nextPlayer;
-            MoveBallCount = 0;
-            MovePieceCount = 0;
+            Command endTurnCmd = new EndTurn(this);
+            if (endTurnCmd.CanDo())
+            {
+                endTurnCmd.Do();
+                CommandHistory.Push(new CommandMemento(endTurnCmd));
+            }
         }
 
         public void MovePiece(int x1, int y1, int x2, int y2)
         {
-            if (x1 == -1 && y1 == -1) // Cas où on initialise le Board
+            if (MovePieceCount >= 2 && x1 != -1 && x2 != -1) throw new InvalidOperationException("Seulement 2 actions MovePiece autorisées par tour "); 
+            MovePiece mp = new MovePiece(x1, y1, x2, y2, this.Board);
+            if (mp.CanDo())
             {
-                if (x2 == 0) // Init pour joueur0
+                mp.Do();
+                MovePieceCount++;
+                CommandHistory.Push(new CommandMemento(mp));
+                UndoHistory.Clear();
+
+                Board.PrintBoard();
+
+                if (MovePieceCount + MoveBallCount == 3 && x1 != -1 && x2 != -1)
                 {
-                    Board.Tiles[x2, y2] = Tiles.PiecePlayer0;
-                } else if (x2 == Board.BoardSize - 1) // Init pour joueur1
-                {
-                    Board.Tiles[x2, y2] = Tiles.PiecePlayer1;
+                    Command endTurn = new EndTurn(this);
+                    endTurn.Do();
                 }
             }
-            else // Cas Normal
+            else throw new InvalidOperationException("Impossible d'effectuer l'action MovePiece (" + x1 + "," + x2 +"). \n");
+        }
+
+        public void UndoLastCommand()
+        {
+            Command LastCmdToUndo = CommandHistory.Pop().GetCommand();
+            if (LastCmdToUndo.CanDo())
             {
-                if (Board.Tiles[x1, y1] == Tiles.PiecePlayer0 || Board.Tiles[x1, y1] == Tiles.PiecePlayer1)
-                {
-                    Board.Tiles[x2, y2] = Board.Tiles[x1, y1];
-                    Board.Tiles[x1, y1] = Tiles.Default;
-                    MovePieceCount++;
-                    if (MovePieceCount + MoveBallCount == 3)
-                    {
-                        int nextPlayer = (CurrentPlayer == 0) ? 1 : 0;
-                        Command endTurn = new EndTurn(nextPlayer);
-                        endTurn.Do(this);
-                    }
-                }
-                else throw new ArgumentException("Game.MovePiece() : il n'y a pas de Piece à la position (" + x1 + "," + x2 + ").");
+                LastCmdToUndo.Undo();
+                UndoHistory.Push(new CommandMemento(LastCmdToUndo));
+                if (LastCmdToUndo is MovePiece) MovePieceCount--;
+                if (LastCmdToUndo is MoveBall) MoveBallCount--;
             }
+            else throw new InvalidOperationException("Impossible de défaire la dernière action :" + LastCmdToUndo.GetType() + "\n");
+        }
+
+        public void RedoLastCommand()
+        {
+            if (UndoHistory.Count == 0) throw new InvalidOperationException("Il n'y a aucune action à redo.");
+            Command LastCmdToRedo = UndoHistory.Pop().GetCommand();
+            if (LastCmdToRedo.CanDo())
+            {
+                LastCmdToRedo.Do();
+                CommandHistory.Push(new CommandMemento(LastCmdToRedo));
+                if (LastCmdToRedo is MovePiece) MovePieceCount++;
+                if (LastCmdToRedo is MoveBall) MoveBallCount++;
+            }
+            else throw new InvalidOperationException("Impossible de refaire la dernière action :" + LastCmdToRedo.GetType() + "\n");
         }
 
         public void MoveBall(int x1, int y1, int x2, int y2)
         {
-            if (x1 == -1 && y1 == -1) // Cas où on initialise le Board
+            if (MoveBallCount == 1 && x1 != -1 && x2 != -1) throw new InvalidOperationException("Seulement 1 action MoveBall autorisée par tour ");
+            MoveBall mb = new MoveBall(x1, y1, x2, y2, this.Board);
+            if (mb.CanDo())
             {
-                if (x2 == 0) // Init pour joueur0
-                {
-                    Board.Tiles[x2, y2] = Tiles.BallPlayer0;
-                }
-                else if (x2 == Board.BoardSize - 1) // Init pour joueur1
-                {
-                    Board.Tiles[x2, y2] = Tiles.BallPlayer1;
-                }
-            }
-            else // Cas Normal
-            {
-                Tiles temp = Board.Tiles[x2, y2];
-                Board.Tiles[x2, y2] = Board.Tiles[x1, y1];
-                Board.Tiles[x1, y1] = temp;
+                mb.Do();
                 MoveBallCount++;
-                if (MovePieceCount + MoveBallCount == 3)
+                CommandHistory.Push(new CommandMemento(mb));
+                UndoHistory.Clear();
+
+                Board.PrintBoard();
+
+                if (MovePieceCount + MoveBallCount == 3 && x1 != -1 && x2 != -1)
                 {
-                    int nextPlayer = (CurrentPlayer == 0) ? 1 : 0;
-                    Command endTurn = new EndTurn(nextPlayer);
-                    endTurn.Do(this);
+                    Command endTurn = new EndTurn(this);
+                    endTurn.Do();
                 }
             }
-        }   
+            else throw new InvalidOperationException("Impossible d'effectuer l'action MoveBall (" + x1 + "," + x2 + "). \n");
+        }
     }
 }

@@ -13,7 +13,10 @@ namespace Diaballik.Tests
     {
 
         Game game;
-        [TestInitialize]
+        EndTurn endTurn;
+        int previousPlayer;
+
+       [TestInitialize]
         public void TestInitialize()
         {
             //game parameters
@@ -29,36 +32,36 @@ namespace Diaballik.Tests
             //build
             StandardBuilder gb = StandardBuilder.Create();
             game = gb.SetBoard(mapSize).SetPlayer0(j0).SetPlayer1(j1).Build();
+
+            previousPlayer = game.CurrentPlayer;
+            endTurn = new EndTurn(game);
         }
 
         [TestMethod()]
         public void DoTest()
         {
-            int previousPlayer = game.CurrentPlayer;
-
-            EndTurn endTurn = new EndTurn(game.CurrentPlayer);
-            endTurn.Do(game);
             int nextPlayer = game.CurrentPlayer;
-
-            Assert.AreNotEqual(previousPlayer, nextPlayer);
-        }
-    /*
-        [TestMethod()]
-        public void CanDoTest()
-        {
-
-        }
-
-        [TestMethod()]
-        public void DoneTest()
-        {
-
+            endTurn.Do();
+            if (previousPlayer == 1)
+            {
+                Assert.IsTrue(nextPlayer == 0);
+            } else
+            {
+                Assert.IsTrue(nextPlayer == 1);
+            }
         }
 
         [TestMethod()]
-        public void IsDoneTest()
+        public void CanDoTest1()
         {
+            game.MovePieceCount = 1;
+            Assert.IsTrue(endTurn.CanDo());
+        }
 
+        [TestMethod()]
+        public void CanDoTest2()
+        {
+            Assert.IsFalse(endTurn.CanDo());
         }
 
         [TestMethod()]
@@ -67,10 +70,13 @@ namespace Diaballik.Tests
 
         }
 
-        [TestMethod()]
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void UndoTest()
         {
-
-        }*/
+            endTurn.Do();
+            Command endTurnToUndo = game.CommandHistory.Pop().GetCommand();
+            endTurnToUndo.Undo();
+        }
     }
 }

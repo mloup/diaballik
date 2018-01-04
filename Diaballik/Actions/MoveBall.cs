@@ -8,82 +8,89 @@ namespace Diaballik
     [Serializable]
     public class MoveBall : Command
     {
-        public MoveBall(int x1, int y1, int x2, int y2)
+        Board _Board;
+
+        public MoveBall(int x1, int y1, int x2, int y2, Board b)
         {
             PrevX = x1;
             PrevY = y1;
             NextX = x2;
             NextY = y2;
+            _Board = b;
         }
 
         ~MoveBall()
         {
         }
 
-        public override void Do(Game g)
+        public override void Do()
         {
-            if (CanDo(g))
+            if (PrevX == -1 && PrevY == -1)
             {
-                g.MoveBall(PrevX, PrevY, NextX, NextY);
-                g.CommandHistory.Push(new CommandMemento(this));
-                g.UndoHistory.Clear();
+                _Board.Tiles[NextX, NextY] = (NextX == 0) ? Tiles.BallPlayer0 : Tiles.BallPlayer1;
+            }
+            else
+            {
+                _Board.Tiles[NextX, NextY] = _Board.Tiles[PrevX, PrevY];
+                if (_Board.Tiles[NextX, NextY] == Tiles.BallPlayer0) _Board.Tiles[PrevX, PrevY] = Tiles.PiecePlayer0;
+                if (_Board.Tiles[NextX, NextY] == Tiles.BallPlayer1) _Board.Tiles[PrevX, PrevY] = Tiles.PiecePlayer1;
+
             }
         }
 
-        public override bool CanDo(Game g)
+        public override bool CanDo()
         {
             if (PrevX == -1 && PrevY == -1) return true; // Initialisation du Board
-            if (g.MoveBallCount == 1) return false; // On ne peut bouger qu'une seule fois la balle par tour
-            Tiles tile = g.Board.Tiles[PrevX, PrevY];
+            Tiles tile = _Board.Tiles[PrevX, PrevY];
             bool okay = true;
-            if (NextX == PrevX)
+            if (NextX == PrevX) // déplacement en colonne
             {
                 for(int i = Math.Min(PrevY, NextY)+1; i< Math.Max(PrevY, NextY); i++)
                 {
-                    if (!(g.Board.Tiles[NextX, i] == Tiles.Default)) okay = false;
+                    if (_Board.Tiles[NextX, i] != Tiles.Default) okay = false;
                 }
-            }else if(NextY == PrevY)
+            }else if(NextY == PrevY) // déplacement en ligne
             {
                 for (int i = Math.Min(PrevX, NextX) + 1; i < Math.Max(PrevX, NextX); i++)
                 {
-                    if (!(g.Board.Tiles[i, NextY] == Tiles.Default)) okay = false;
+                    if (_Board.Tiles[i, NextY] != Tiles.Default) okay = false;
                 }
             }
-            else if(PrevY < NextY && PrevX < NextX)
+            else if(PrevY < NextY && PrevX < NextX) // diagonale BasDroite
             {
                 for (int i = 1; i < NextY - PrevY; i++)
                 {
-                    if (!(g.Board.Tiles[PrevX + i, PrevY + i] == Tiles.Default)) okay = false;
+                    if (_Board.Tiles[PrevX + i, PrevY + i] != Tiles.Default) okay = false;
                 }
 
             }
-            else if(PrevY > NextY && PrevX > NextX)
+            else if(PrevY > NextY && PrevX > NextX) // diagonale HautGauche
             {
                 for (int i = 1; i < PrevY - NextY; i++)
                 {
-                    if (!(g.Board.Tiles[PrevX - i, PrevY - i] == Tiles.Default)) okay = false;
+                    if (_Board.Tiles[PrevX - i, PrevY - i] != Tiles.Default) okay = false;
                 }
             }
-            else if(PrevY < NextY && PrevX > NextX)
+            else if(PrevY < NextY && PrevX > NextX) // diagonale BasGauche
             {
                 for (int i = 1; i < NextY - PrevY; i++)
                 {
-                    if (!(g.Board.Tiles[PrevX - i, PrevY + i] == Tiles.Default)) okay = false;
+                    if (_Board.Tiles[PrevX - i, PrevY + i] != Tiles.Default) okay = false;
                 }
             }
-            else if(PrevY > NextY && PrevX < NextX)
+            else if(PrevY > NextY && PrevX < NextX) // diagonale HautDroit
             {
                 for (int i = 1; i < NextX - PrevX; i++)
                 {
-                    if (!(g.Board.Tiles[PrevX + i, PrevY - i] == Tiles.Default)) okay = false;
+                    if (_Board.Tiles[PrevX + i, PrevY - i] != Tiles.Default) okay = false;
                 }
             }
 
 
-            switch (tile)
+            switch (tile) // Chelou ?
             {
                 case Tiles.BallPlayer0:
-                    if(g.Board.Tiles[NextX, NextY] == Tiles.PiecePlayer0)
+                    if(_Board.Tiles[NextX, NextY] == Tiles.PiecePlayer0)
                     {
                         if (okay) return true;
                     }
@@ -93,7 +100,7 @@ namespace Diaballik
                     }
                     break;
                 case Tiles.BallPlayer1:
-                    if (g.Board.Tiles[NextX, NextY] == Tiles.PiecePlayer1)
+                    if (_Board.Tiles[NextX, NextY] == Tiles.PiecePlayer1)
                     {
                         if (okay) return true;
                     }
@@ -110,41 +117,15 @@ namespace Diaballik
             
         }
 
-        public override void Redo(Game g)
+        public override void Undo()
         {
-            Command cmd = g.UndoHistory.Pop().GetCommand();
-            if (cmd.CanDo(g) && cmd is MoveBall)
-            {
-                cmd.Do(g);
-            }
-            else
-            {
-                throw new ArgumentException("La dernière commande undo n'est pas de type MoveBall");
-            }
-        }
-
-        public override void Undo(Game g)
-        {
-            Command UndoLastCmd = g.CommandHistory.Pop().GetCommand();
-            if (UndoLastCmd is MoveBall)
-            {
-                g.MoveBall(UndoLastCmd.NextX, UndoLastCmd.NextY, UndoLastCmd.PrevX, UndoLastCmd.PrevY);
-                g.UndoHistory.Push(new CommandMemento(UndoLastCmd));
-            }
-            else
-            {
-                throw new ArgumentException("La dernière commande n'est pas de type MoveBall");
-            }
-        }
-
-        public override void Done()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void IsDone()
-        {
-            throw new NotImplementedException();
+            int prevXTemp = PrevX;
+            int prevYTemp = PrevY;
+            PrevX = NextX;
+            PrevY = NextY;
+            NextX = prevXTemp;
+            NextY = prevYTemp;
+            this.Do();
         }
     }
 }

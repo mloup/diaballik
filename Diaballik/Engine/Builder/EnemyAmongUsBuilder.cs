@@ -31,23 +31,19 @@ namespace Diaballik
             // initiaisation du Board avec que des Pieces
             for (int i = 0; i < size; i++)
             {
-                MovePiece initMovePieceCmd = new MovePiece(-1, -1, 0, i);
-                initMovePieceCmd.Do(MyGameToBuild);
+                MyGameToBuild.MovePiece(-1, -1, 0, i);
 
             }
 
             for (int i = 0; i < size; i++)
             {
-                MovePiece initMovePieceCmd = new MovePiece(-1, -1, size - 1, i);
-                initMovePieceCmd.Do(MyGameToBuild);
+                MyGameToBuild.MovePiece(-1, -1, size - 1, i);
             }
 
             // placement des Balles au centre
-            MoveBall initMoveBallCmd0 = new MoveBall(-1, -1, 0, ((size + 1) / 2) - 1);
-            initMoveBallCmd0.Do(MyGameToBuild);
+            MyGameToBuild.MoveBall(-1, -1, 0, ((size + 1) / 2) - 1);
 
-            MoveBall initMoveBallCmd1 = new MoveBall(-1, -1, size - 1, ((size + 1) / 2) - 1);
-            initMoveBallCmd1.Do(MyGameToBuild);
+            MyGameToBuild.MoveBall(-1, -1, size - 1, ((size + 1) / 2) - 1);
 
             // Générer des nombres aléatoires
             int rand0_1 = new Random().Next(0, size);
@@ -66,14 +62,10 @@ namespace Diaballik
                 rand1_2 = new Random().Next(0, size);
 
             // Placement aléatoire des 2 pièces ennemies de chaque côtés
-            MovePiece randomMovePieceCmd = new MovePiece(-1, -1, 0, rand0_1);
-            randomMovePieceCmd.Do(MyGameToBuild);
-            randomMovePieceCmd = new MovePiece(-1, -1, 0, rand0_2);
-            randomMovePieceCmd.Do(MyGameToBuild);
-            randomMovePieceCmd = new MovePiece(-1, -1, size - 1, rand1_1);
-            randomMovePieceCmd.Do(MyGameToBuild);
-            randomMovePieceCmd = new MovePiece(-1, -1, size - 1, rand1_2);
-            randomMovePieceCmd.Do(MyGameToBuild);
+            MyGameToBuild.MovePiece(-1, -1, 0, rand0_1);
+            MyGameToBuild.MovePiece(-1, -1, 0, rand0_2);
+            MyGameToBuild.MovePiece(-1, -1, size - 1, rand1_1);
+            MyGameToBuild.MovePiece(-1, -1, size - 1, rand1_2);
         }
     }
 }

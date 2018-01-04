@@ -7,7 +7,7 @@ namespace Diaballik
 {
     public class CommandMemento
     {
-        public Command _cmd;
+        private Command _cmd;
 
         public CommandMemento(Command c)
         {

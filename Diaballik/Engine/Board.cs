@@ -57,9 +57,18 @@ namespace Diaballik
             
         }
 
-        public void GetPossibleMoves(int x, int y)
+        public void PrintBoard()
         {
-            throw new System.NotImplementedException();
+            Console.Write("Etat du board : \n");
+            for (int i = 0 ; i < BoardSize; i++)
+            {
+                for (int j = 0; j < BoardSize; j++)
+                {
+                    Console.Write((int) Tiles[j, i] + " ");
+                }
+                Console.Write("\n");
+            }
+            Console.Write("\n");
         }
     }
 }

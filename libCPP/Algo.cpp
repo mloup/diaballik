@@ -25,7 +25,6 @@ namespace Strategy {
 		
 		//printf("Selection de la piece : X = %i  et  Y = %i \n", prevX, prevY);
 		int newIndex = GetRandomMovePieceAmongPossible(tiles, sideSize, pieceIndex);
-		if (newIndex == -1) throw new exception("Algo.GetRandomMovePieceAmongPossible failed");
 
 		actionResult[0] = (int)pieceIndex / sideSize;		// prevX
 		actionResult[1] = pieceIndex % sideSize;			// prevY
@@ -40,7 +39,7 @@ namespace Strategy {
 		int sideSize = (int)sqrt(nbTiles);	 // sideSize = nb Tiles par côté du Board
 		int ballIndex = GetBallIndex(tiles, nbTiles);
 
-		printf("current Ball index is : %i \n", ballIndex);
+		//printf("current Ball index is : %i \n", ballIndex);
 
 		int newBallIndex = GetRandomMoveBallAmongPossible(tiles, sideSize, ballIndex);
 
@@ -56,7 +55,7 @@ namespace Strategy {
 			actionResult[2] = (int)newBallIndex / sideSize;		// nextX
 			actionResult[3] = newBallIndex % sideSize;			// nextY
 		}
-		printf("Algo_MoveBallNoobStrategy want to MoveBall from (%i , %i) --> (%i ,  %i) \n", actionResult[0], actionResult[1], actionResult[2], actionResult[3]);
+		//printf("Algo_MoveBallNoobStrategy want to MoveBall from (%i , %i) --> (%i ,  %i) \n", actionResult[0], actionResult[1], actionResult[2], actionResult[3]);
 		return *actionResult;
 	}
 
@@ -84,17 +83,19 @@ namespace Strategy {
 		case 3: // MoveRight
 			return oldIndex + sideSize;
 		default:
-			return -1;
+			return -10;
 		}
 	}
 
 	int GetRandomMoveBallAmongPossible(const Tiles*(&tiles), const int& sideSize, const int& oldBallIndex) {
 		int* indexOfAllPieces = GetAllPieceIndex(tiles, sideSize*sideSize);
 
+		/*
 		printf("Index des pieces de l'IA : \n");
 		for (int i = 0; i < sideSize - 1; i++) {
 			printf("%i\n", indexOfAllPieces[i]);
 		}
+		*/
 		vector<int> indexOfPossibleMoves;
 
 		for (int i = 0; i < (sideSize - 1); i++) {
@@ -215,10 +216,10 @@ namespace Strategy {
 			}
 		}
 
-		printf("Liste des MoveBall possible :\n");
+		/*printf("Liste des MoveBall possible :\n");
 		for (int i : indexOfPossibleMoves) {
 			printf("\t (%i, %i) --> (%i, %i) \n", (int)oldBallIndex / sideSize, oldBallIndex % sideSize, i / sideSize, i % sideSize);
-		}
+		}*/
 
 		if (indexOfPossibleMoves.size() == 0) return -1; // Dans le cas où il est impossible de déplacer la balle
 		

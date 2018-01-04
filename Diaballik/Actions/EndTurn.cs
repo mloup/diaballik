@@ -7,45 +7,29 @@ namespace Diaballik
     public class EndTurn : Command
     {
         public int NextPlayer { get; set; }
+        public Game _Game { get; set; }
 
-        public EndTurn(int nextPl)
+        public EndTurn(Game game)
         {
-            NextPlayer = nextPl;
+            _Game = game;
+            NextPlayer = (_Game.CurrentPlayer == 1) ? 0 : 1;
         }
 
         
-        public override void Do(Game g)
+        public override void Do()
         {
-            if (CanDo(g))
-            {
-                g.EndTurn(NextPlayer);
-                g.CommandHistory.Push(new CommandMemento(this));
-                g.UndoHistory.Clear();
-            }
+            _Game.CurrentPlayer = NextPlayer;
+            _Game.MoveBallCount = 0;
+            _Game.MovePieceCount = 0;
         }
         
-        public override bool CanDo(Game g)
+        public override bool CanDo()
         {
-            return (g.MoveBallCount + g.MovePieceCount >= 1)? true : false; // Un joueur est obligé de faire au moins une action par tour
-        }
-
-        public override void Done()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void IsDone()
-        {
-            throw new NotImplementedException();
+            return (_Game.MoveBallCount + _Game.MovePieceCount >= 1)? true : false; // Un joueur est obligé de faire au moins une action par tour
         }
 
         
-        public override void Redo(Game g)
-        {
-           
-        }
-
-        public override void Undo(Game g)
+        public override void Undo()
         {
             throw new InvalidOperationException("Impossible d'undo la commande EndTurn");
         }

@@ -12,17 +12,11 @@ namespace Diaballik
         public int NextX { get; set; }
         public int NextY { get; set; }
 
-        public abstract void Do(Game g);
+        public abstract void Do();
 
-        public abstract bool CanDo(Game g);
+        public abstract bool CanDo();
 
-        public abstract void Redo(Game g);
-
-        public abstract void Undo(Game g);
-        
-        public abstract void Done();
-
-        public abstract void IsDone();
+        public abstract void Undo();
 
         public Command Clone()
         {

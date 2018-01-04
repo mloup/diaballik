@@ -22,7 +22,7 @@ namespace DiaballikTest
         {
             pl0 = new HumanPlayer("Pierre", "rouge");
             pl1 = new HumanPlayer("Marie", "Bleu");
-            var algo = new NoobStrategy();
+            NoobStrategy algo = new NoobStrategy();
             plIA = new IAPlayer("Robot", "green", algo);
             nbtiles = 3;
         }
