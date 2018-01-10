@@ -45,7 +45,6 @@
     <Compile Include="Actions\EndTurn.cs" />
     <Compile Include="Engine\Builder\BallRandomBuilder.cs" />
     <Compile Include="Engine\Board.cs" />
-    <Compile Include="Engine\Builder\LoadGameBuilder.cs" />
     <Compile Include="Engine\Builder\GameBuilder.cs" />
     <Compile Include="Engine\GameSaveManager.cs" />
     <Compile Include="Actions\Command.cs" />

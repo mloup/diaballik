@@ -51,7 +51,6 @@
     <Compile Include="Actions\EndTurnTest.cs" />
     <Compile Include="Actions\MoveBallTest.cs" />
     <Compile Include="Actions\MovePieceTest.cs" />
-    <Compile Include="Engine\Builder\LoadGameBuilderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\Builder\GameBuilderTest.cs" />
   </ItemGroup>
