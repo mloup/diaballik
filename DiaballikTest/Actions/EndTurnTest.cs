@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Diaballik.Engine;
 using Diaballik.Engine.Builder;
-using Diaballik.Actors;
 
 namespace Diaballik.Tests
 {
