@@ -7,32 +7,33 @@ namespace Diaballik
     [Serializable]
     public class EndTurn : Command
     {
-        public int NextPlayer { get; set; }
-        public Game _Game { get; set; }
 
-        public EndTurn(Game game)
+        public EndTurn()
         {
-            _Game = game;
-            NextPlayer = (_Game.CurrentPlayer == 1) ? 0 : 1;
         }
 
         
-        public override void Do()
+        public override void Do(Game g)
         {
-            _Game.CurrentPlayer = NextPlayer;
-            _Game.MoveBallCount = 0;
-            _Game.MovePieceCount = 0;
+            g.CurrentPlayer = (g.CurrentPlayer == 1) ? 0 : 1;
+            g.MoveBallCount = 0;
+            g.MovePieceCount = 0;
         }
         
-        public override bool CanDo()
+        public override bool CanDo(Game g)
         {
-            return (_Game.MoveBallCount + _Game.MovePieceCount >= 1)? true : false; // Un joueur est obligé de faire au moins une action par tour
+            return (g.MoveBallCount + g.MovePieceCount >= 1)? true : false; // Un joueur est obligé de faire au moins une action par tour
         }
 
         
-        public override void Undo()
+        public override void Undo(Game g)
         {
             throw new InvalidOperationException("Impossible d'undo la commande EndTurn");
+        }
+
+        public override bool CanUndo(Game g)
+        {
+            return false;
         }
     }
 }

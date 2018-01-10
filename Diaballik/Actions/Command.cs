@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diaballik.Engine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,28 +9,17 @@ namespace Diaballik
     [Serializable]
     public abstract class Command
     {
-        public int PrevX { get; set; }
-        public int PrevY { get; set; }
-        public int NextX { get; set; }
-        public int NextY { get; set; }
+        public abstract void Do(Game g);
 
-        public abstract void Do();
+        public abstract bool CanDo(Game g);
 
-        public abstract bool CanDo();
+        public abstract void Undo(Game g);
 
-        public abstract void Undo();
+        public abstract bool CanUndo(Game g);
 
-        public Command Clone()
+        public Command Clone() // TO FIX
         {
             return MemberwiseClone() as Command;
-        }
-
-        public override String ToString()
-        {
-            String res ="";
-            if (this is EndTurn) res += "\t\tEndTurn\n";
-            else res += "\t\t" + this.GetType() + " : from(" + PrevX + ", " + PrevY + ") to (" + NextX + ", " + NextY + ")\n";
-            return res;
         }
     }
 }

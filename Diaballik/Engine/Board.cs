@@ -6,7 +6,7 @@ using System.Text;
 namespace Diaballik.Engine
 {
     [Serializable]
-    public enum Tiles
+    public enum TileTypes
     {
         Default = 0,
         PiecePlayer0 = 1,
@@ -18,8 +18,9 @@ namespace Diaballik.Engine
     [Serializable]
     public class Board
     {
-        public Tiles[,] Tiles { get; set; }
+        public TileTypes[,] Tiles { get; set; }
         public int BoardSize { get; set; }
+        public int MovePieceCount { get; private set; }
 
         public Board()
         {  
@@ -30,7 +31,7 @@ namespace Diaballik.Engine
             if (nbTiles%2 == 1)
             {
                 BoardSize = nbTiles;
-                Tiles = new Tiles[BoardSize, BoardSize];
+                Tiles = new TileTypes[BoardSize, BoardSize];
             }
             else
             {
@@ -39,7 +40,7 @@ namespace Diaballik.Engine
         }
 
         // Seulement utilisé pour les tests
-        public Board(Tiles[,] tiles)
+        public Board(TileTypes[,] tiles)
         {
             if (tiles.Length%2 == 1)
             {
@@ -53,9 +54,32 @@ namespace Diaballik.Engine
             
         }
 
-        ~Board()
+        public void MovePiece(int PrevX, int PrevY, int NextX, int NextY)
         {
-            
+            if (PrevX == -1 && PrevY == -1) // Initialisation du Board
+            {
+                Tiles[NextX, NextY] = (NextX == 0) ? TileTypes.PiecePlayer0 : TileTypes.PiecePlayer1;
+            }
+            else
+            {
+                Tiles[NextX, NextY] = Tiles[PrevX, PrevY];
+                Tiles[PrevX, PrevY] = TileTypes.Default;
+            }
+        }
+
+        public void MoveBall(int PrevX, int PrevY, int NextX, int NextY)
+        {
+            if (PrevX == -1 && PrevY == -1)
+            {
+                Tiles[NextX, NextY] = (NextX == 0) ? TileTypes.BallPlayer0 : TileTypes.BallPlayer1;
+            }
+            else
+            {
+                Tiles[NextX, NextY] = Tiles[PrevX, PrevY];
+                if (Tiles[NextX, NextY] == TileTypes.BallPlayer0) Tiles[PrevX, PrevY] = TileTypes.PiecePlayer0;
+                if (Tiles[NextX, NextY] == TileTypes.BallPlayer1) Tiles[PrevX, PrevY] = TileTypes.PiecePlayer1;
+
+            }
         }
 
         public override String ToString()

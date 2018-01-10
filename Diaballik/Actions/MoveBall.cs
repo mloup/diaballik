@@ -4,94 +4,76 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Diaballik
+namespace Diaballik.Actions
 {
     [Serializable]
-    public class MoveBall : Command
+    public class MoveBall : Move
     {
-        Board _Board;
 
-        public MoveBall(int x1, int y1, int x2, int y2, Board b)
-        {
-            PrevX = x1;
-            PrevY = y1;
-            NextX = x2;
-            NextY = y2;
-            _Board = b;
-        }
-
-        ~MoveBall()
+        public MoveBall(int x1, int y1, int x2, int y2) : base(x1, y1, x2, y2)
         {
         }
 
-        public override void Do()
-        {
-            if (PrevX == -1 && PrevY == -1)
-            {
-                _Board.Tiles[NextX, NextY] = (NextX == 0) ? Tiles.BallPlayer0 : Tiles.BallPlayer1;
-            }
-            else
-            {
-                _Board.Tiles[NextX, NextY] = _Board.Tiles[PrevX, PrevY];
-                if (_Board.Tiles[NextX, NextY] == Tiles.BallPlayer0) _Board.Tiles[PrevX, PrevY] = Tiles.PiecePlayer0;
-                if (_Board.Tiles[NextX, NextY] == Tiles.BallPlayer1) _Board.Tiles[PrevX, PrevY] = Tiles.PiecePlayer1;
 
-            }
+        public override void Do(Game g)
+        {
+            this.Do(g, PrevX, PrevY, NextX, NextY);
         }
 
-        public override bool CanDo()
+        public override bool CanDo(Game g)
         {
             if (PrevX == -1 && PrevY == -1) return true; // Initialisation du Board
-            Tiles tile = _Board.Tiles[PrevX, PrevY];
+            if (g.MoveBallCount == 1 && PrevX != -1 && PrevY != -1) return false;
+            TileTypes tile = g.Board.Tiles[PrevX, PrevY];
             bool okay = true;
             if (NextX == PrevX) // déplacement en colonne
             {
-                for(int i = Math.Min(PrevY, NextY)+1; i< Math.Max(PrevY, NextY); i++)
+                for (int i = Math.Min(PrevY, NextY) + 1; i < Math.Max(PrevY, NextY); i++)
                 {
-                    if (_Board.Tiles[NextX, i] != Tiles.Default) okay = false;
+                    if (g.Board.Tiles[NextX, i] != TileTypes.Default) okay = false;
                 }
-            }else if(NextY == PrevY) // déplacement en ligne
+            }
+            else if (NextY == PrevY) // déplacement en ligne
             {
                 for (int i = Math.Min(PrevX, NextX) + 1; i < Math.Max(PrevX, NextX); i++)
                 {
-                    if (_Board.Tiles[i, NextY] != Tiles.Default) okay = false;
+                    if (g.Board.Tiles[i, NextY] != TileTypes.Default) okay = false;
                 }
             }
-            else if(PrevY < NextY && PrevX < NextX) // diagonale BasDroite
+            else if (PrevY < NextY && PrevX < NextX) // diagonale BasDroite
             {
                 for (int i = 1; i < NextY - PrevY; i++)
                 {
-                    if (_Board.Tiles[PrevX + i, PrevY + i] != Tiles.Default) okay = false;
+                    if (g.Board.Tiles[PrevX + i, PrevY + i] != TileTypes.Default) okay = false;
                 }
 
             }
-            else if(PrevY > NextY && PrevX > NextX) // diagonale HautGauche
+            else if (PrevY > NextY && PrevX > NextX) // diagonale HautGauche
             {
                 for (int i = 1; i < PrevY - NextY; i++)
                 {
-                    if (_Board.Tiles[PrevX - i, PrevY - i] != Tiles.Default) okay = false;
+                    if (g.Board.Tiles[PrevX - i, PrevY - i] != TileTypes.Default) okay = false;
                 }
             }
-            else if(PrevY < NextY && PrevX > NextX) // diagonale BasGauche
+            else if (PrevY < NextY && PrevX > NextX) // diagonale BasGauche
             {
                 for (int i = 1; i < NextY - PrevY; i++)
                 {
-                    if (_Board.Tiles[PrevX - i, PrevY + i] != Tiles.Default) okay = false;
+                    if (g.Board.Tiles[PrevX - i, PrevY + i] != TileTypes.Default) okay = false;
                 }
             }
-            else if(PrevY > NextY && PrevX < NextX) // diagonale HautDroit
+            else if (PrevY > NextY && PrevX < NextX) // diagonale HautDroit
             {
                 for (int i = 1; i < NextX - PrevX; i++)
                 {
-                    if (_Board.Tiles[PrevX + i, PrevY - i] != Tiles.Default) okay = false;
+                    if (g.Board.Tiles[PrevX + i, PrevY - i] != TileTypes.Default) okay = false;
                 }
             }
 
-
             switch (tile) // Chelou ?
             {
-                case Tiles.BallPlayer0:
-                    if(_Board.Tiles[NextX, NextY] == Tiles.PiecePlayer0)
+                case TileTypes.BallPlayer0:
+                    if (g.Board.Tiles[NextX, NextY] == TileTypes.PiecePlayer0)
                     {
                         if (okay) return true;
                     }
@@ -100,8 +82,8 @@ namespace Diaballik
                         return false;
                     }
                     break;
-                case Tiles.BallPlayer1:
-                    if (_Board.Tiles[NextX, NextY] == Tiles.PiecePlayer1)
+                case TileTypes.BallPlayer1:
+                    if (g.Board.Tiles[NextX, NextY] == TileTypes.PiecePlayer1)
                     {
                         if (okay) return true;
                     }
@@ -115,18 +97,98 @@ namespace Diaballik
 
             }
             return false;
-            
+
         }
 
-        public override void Undo()
+
+        //TODO
+        public override bool CanUndo(Game g)
         {
-            int prevXTemp = PrevX;
-            int prevYTemp = PrevY;
-            PrevX = NextX;
-            PrevY = NextY;
-            NextX = prevXTemp;
-            NextY = prevYTemp;
-            this.Do();
+            if (g.MoveBallCount == 1) return false;
+            TileTypes tile = g.Board.Tiles[PrevX, PrevY];
+            bool okay = true;
+            if (NextX == PrevX) // déplacement en colonne
+            {
+                for (int i = Math.Min(PrevY, NextY) + 1; i < Math.Max(PrevY, NextY); i++)
+                {
+                    if (g.Board.Tiles[NextX, i] != TileTypes.Default) okay = false;
+                }
+            }
+            else if (NextY == PrevY) // déplacement en ligne
+            {
+                for (int i = Math.Min(PrevX, NextX) + 1; i < Math.Max(PrevX, NextX); i++)
+                {
+                    if (g.Board.Tiles[i, NextY] != TileTypes.Default) okay = false;
+                }
+            }
+            else if (PrevY < NextY && PrevX < NextX) // diagonale BasDroite
+            {
+                for (int i = 1; i < NextY - PrevY; i++)
+                {
+                    if (g.Board.Tiles[PrevX + i, PrevY + i] != TileTypes.Default) okay = false;
+                }
+
+            }
+            else if (PrevY > NextY && PrevX > NextX) // diagonale HautGauche
+            {
+                for (int i = 1; i < PrevY - NextY; i++)
+                {
+                    if (g.Board.Tiles[PrevX - i, PrevY - i] != TileTypes.Default) okay = false;
+                }
+            }
+            else if (PrevY < NextY && PrevX > NextX) // diagonale BasGauche
+            {
+                for (int i = 1; i < NextY - PrevY; i++)
+                {
+                    if (g.Board.Tiles[PrevX - i, PrevY + i] != TileTypes.Default) okay = false;
+                }
+            }
+            else if (PrevY > NextY && PrevX < NextX) // diagonale HautDroit
+            {
+                for (int i = 1; i < NextX - PrevX; i++)
+                {
+                    if (g.Board.Tiles[PrevX + i, PrevY - i] != TileTypes.Default) okay = false;
+                }
+            }
+
+            switch (tile) // Chelou ?
+            {
+                case TileTypes.BallPlayer0:
+                    if (g.Board.Tiles[NextX, NextY] == TileTypes.PiecePlayer0)
+                    {
+                        if (okay) return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case TileTypes.BallPlayer1:
+                    if (g.Board.Tiles[NextX, NextY] == TileTypes.PiecePlayer1)
+                    {
+                        if (okay) return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                default: return false;
+
+
+            }
+            return false;
+
+        }
+
+        public override void Undo(Game g)
+        {
+            this.Do(g, NextX, NextY, PrevX, PrevY);
+        }
+
+        private void Do(Game g, int prevX, int prevY, int nextX, int nextY)
+        {
+            g.Board.MoveBall(prevX, prevY, nextX, nextY);
         }
     }
 }

@@ -4,49 +4,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Diaballik
+namespace Diaballik.Actions
 {
     [Serializable]
-    public class MovePiece : Command
+    public class MovePiece : Move
     {
-        public Board _Board { get; set; }
-
-        public MovePiece(int x1, int y1, int x2, int y2, Board b)
-        {
-            PrevX = x1;
-            PrevY = y1;
-            NextX = x2;
-            NextY = y2;
-            _Board = b;
-
-        }
-
-        ~MovePiece()
+        public MovePiece(int x1, int y1, int x2, int y2) : base(x1, y1, x2, y2)
         {
         }
 
-        public override void Do()
+
+        public override void Do(Game g)
         {
-            if (PrevX == -1 && PrevY == -1) // Initialisation du Board
-            {
-                _Board.Tiles[NextX, NextY] = (NextX == 0) ? Tiles.PiecePlayer0 : Tiles.PiecePlayer1;
-            }
-            else
-            {
-                _Board.Tiles[NextX, NextY] = _Board.Tiles[PrevX, PrevY];
-                _Board.Tiles[PrevX, PrevY] = Tiles.Default;
-            }
+            this.Do(g, PrevX, PrevY, NextX, NextY);
         }
 
-        public override bool CanDo()
+        public override bool CanDo(Game g)
         {
             bool res = false;
-            if (PrevX == -1 && PrevY == -1) return true; // Initialisation du Board
-            if (_Board.Tiles[NextX, NextY]== Tiles.Default)
+            if (g.MovePieceCount == 2) return false;
+            Console.Write("test1" + res + "\n");
+            if (g.Board.Tiles[NextX, NextY] == TileTypes.Default)
             {
-                if (_Board.Tiles[PrevX, PrevY] == Tiles.PiecePlayer0 || _Board.Tiles[PrevX, PrevY] == Tiles.PiecePlayer1)
+                Console.Write("test2" + res + "\n");
+                if (g.Board.Tiles[PrevX, PrevY] == TileTypes.PiecePlayer0 || g.Board.Tiles[PrevX, PrevY] == TileTypes.PiecePlayer1)
                 {
+                    Console.Write("test3" + res + "\n");
                     if ((Math.Abs(NextX - PrevX) == 1 && PrevY == NextY) || (Math.Abs(NextY - PrevY) == 1 && PrevX == NextX))
+                    {
+                        res = true;
+                        Console.Write("test4" + res + "\n");
+                    }
+                }
+            }
+            Console.Write("test5" + res + "\n");
+            return res;
+        }
+
+        public override bool CanUndo(Game g)
+        {
+            bool res = false;
+            if (g.MovePieceCount == 0) return false;
+            if (g.Board.Tiles[PrevX, PrevY] == TileTypes.Default)
+            {
+                if (g.Board.Tiles[NextX, NextY] == TileTypes.PiecePlayer0 || g.Board.Tiles[NextX, NextY] == TileTypes.PiecePlayer1)
+                {
+                    if ((Math.Abs(PrevX - NextX) == 1 && PrevY == NextY) || (Math.Abs(NextY - PrevY) == 1 && PrevX == NextX))
                     {
                         res = true;
                     }
@@ -55,21 +58,14 @@ namespace Diaballik
             return res;
         }
 
-        public override void Undo()
-        {
-            int prevXTemp = PrevX;
-            int prevYTemp = PrevY;
-            PrevX = NextX;
-            PrevY = NextY;
-            NextX = prevXTemp;
-            NextY = prevYTemp;
-            this.Do();
+        public override void Undo(Game g)
+        { 
+            this.Do(g , NextX, NextY, PrevX, PrevY);
         }
 
-        /*public override bool IsDone()
+        private void Do(Game g, int prevX, int prevY, int nextX, int nextY)
         {
-            return (_Board.Tiles[NextX, NextY] == Tiles.PiecePlayer0 ||
-                    _Board.Tiles[NextX, NextY] == Tiles.PiecePlayer1) ? true : false;
-        }*/
+            g.Board.MovePiece(prevX, prevY, nextX, nextY);
+        }
     }
 }

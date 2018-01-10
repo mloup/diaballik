@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Diaballik;
+using Diaballik.Actions;
 using Diaballik.Actors;
 using Diaballik.Actors.Strategy;
 using Diaballik.Engine;
@@ -16,17 +17,12 @@ namespace TestWrapper
             var algo = new NoobStrategy();
             Player p1 = new IAPlayer("Pierre", "noir", algo);
 
-            Game g = StandardBuilder
-                        .Create()
-                            .SetBoard(5)
-                            .SetPlayer1(p1)
-                            .SetPlayer0(p0)
-                        .Build();
+            Game g = new GameBuilder().SetBoard(5, BoardStrategy.Standard).SetPlayer1(p1).SetPlayer0(p0).Build();
 
             g.CurrentPlayer = 0; // Simulate Human Player Turn
-            g.MovePiece(0, 0, 1, 0);
-            g.MovePiece(1, 0, 2, 0);
-            g.EndTurn();
+            g.Update(new MovePiece(0, 0, 1, 0));
+            g.Update(new MovePiece(1, 0, 2, 0));
+            g.Update(new EndTurn());
 
             // IA turn                
             algo.PlayOneAction(g);
@@ -36,11 +32,11 @@ namespace TestWrapper
             Thread.Sleep(3000);
             algo.PlayOneAction(g);
             */
-            g.EndTurn();
+            g.Update(new EndTurn());
                 
-            g.MoveBall(0, 2, 2, 0);
-            g.MovePiece(0, 2, 1, 2);
-            g.MovePiece(0, 4, 1, 4);
+            g.Update(new MoveBall(0, 2, 2, 0));
+            g.Update(new MovePiece(0, 2, 1, 2));
+            g.Update(new MovePiece(0, 4, 1, 4));
 
             Console.Write(g.ToString());
             Thread.Sleep(100000);

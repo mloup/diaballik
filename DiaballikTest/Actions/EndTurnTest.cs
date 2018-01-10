@@ -20,31 +20,21 @@ namespace Diaballik.Tests
         int previousPlayer;
 
        [TestInitialize]
-        public void TestInitialize()
+        public void TestEndTurnInitialize()
         {
-            //game parameters
-            int mapSize = 7;
-            String nameJ0 = "Pierre";
-            String nameJ1 = "Marie";
-            String colorJ0 = "bleu";
-            String colorJ1 = "rouge";
-
-            Player j0 = new HumanPlayer(nameJ0, colorJ0);
-            Player j1 = new HumanPlayer(nameJ1, colorJ1);
-
             //build
-            StandardBuilder gb = StandardBuilder.Create();
-            game = gb.SetBoard(mapSize).SetPlayer0(j0).SetPlayer1(j1).Build();
+            BoardStrategy strat = BoardStrategy.Standard;
+            game = new GameBuilder().SetBoard(7, strat).SetPlayer0("Clément", "vert").SetPlayer1("Pierre", "orange").Build();
 
             previousPlayer = game.CurrentPlayer;
-            endTurn = new EndTurn(game);
+            endTurn = new EndTurn();
         }
 
         [TestMethod()]
-        public void DoTest()
+        public void DoEndTurnTest()
         {
             game.MovePieceCount = 1; // simulation d'un MovePiece afin d'executer la commande endTurn
-            endTurn.Do();
+            endTurn.Do(game);
             int nextPlayer = game.CurrentPlayer;
             if (previousPlayer == 1)
             {
@@ -56,25 +46,25 @@ namespace Diaballik.Tests
         }
 
         [TestMethod()]
-        public void CanDoTest1()
+        public void CanDoEndTurnTest1()
         {
             game.MovePieceCount = 1;
-            Assert.IsTrue(endTurn.CanDo());
+            Assert.IsTrue(endTurn.CanDo(game));
         }
 
         [TestMethod()]
-        public void CanDoTest2()
+        public void CanDoEndTurnTest2()
         {
-            Assert.IsFalse(endTurn.CanDo());
+            Assert.IsFalse(endTurn.CanDo(game));
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void UndoTest()
+        public void UndoEndTurnTest()
         {
-            endTurn.Do();
+            endTurn.Do(game);
             Command endTurnToUndo = game.CommandHistory.Pop().GetCommand();
-            endTurnToUndo.Undo();
+            endTurnToUndo.Undo(game);
         }
     }
 }
