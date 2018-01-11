@@ -13,33 +13,118 @@ namespace TestWrapper
     {
         static void Main(string[] args)
         {
-            Player p0 = new HumanPlayer("Marie", "rouge");
-            var algo = new NoobStrategy();
-            Player p1 = new IAPlayer("Pierre", "noir", algo);
+            Console.WriteLine("Menu diaballik (entrer le numéro de l'action) :");
+            Console.WriteLine("\t 1 : Nouvelle Partie (standard)");
+            Console.WriteLine("\t 2 : Charger une partie (standard)");
+            Console.WriteLine("\t 3 : exit");
+            bool validation = true;
+            while (validation) {
+                string action = Console.ReadLine();
+                switch (action)
+                {
+                    case "1":
+                        Console.WriteLine("Le nom du joueur 1:");
+                        string nom1 = Console.ReadLine();
+                        Console.WriteLine("La couleur du joueur 1:");
+                        string color1 = Console.ReadLine();
+                        Console.WriteLine("Le nom du joueur 2:");
+                        string nom2 = Console.ReadLine();
+                        Console.WriteLine("La couleur du joueur 2:");
+                        string color2 = Console.ReadLine();
 
-            Game g = new GameBuilder().SetBoard(5, BoardStrategy.Standard).SetPlayer1(p1).SetPlayer0(p0).Build();
+                        Console.WriteLine("Type de Board souhaiter (standard/ballrandom/enemyamongus):");
+                        BoardStrategy strat;
+                        string boardStrat = Console.ReadLine();
+                        switch (boardStrat)
+                        {
+                            case "standrard":
+                                strat = BoardStrategy.Standard;
+                                break;
+                            case "ballrandom":
+                                strat = BoardStrategy.BallRandom;
+                                break;
+                            case "enemyamongus":
+                                strat = BoardStrategy.EnemyAmongUs;
+                                break;
+                            default:
+                                strat = BoardStrategy.Standard;
+                                break;
+                        }
 
-            g.CurrentPlayer = 0; // Simulate Human Player Turn
-            g.Update(new MovePiece(0, 0, 1, 0));
-            g.Update(new MovePiece(1, 0, 2, 0));
-            g.Update(new EndTurn());
+                        Console.WriteLine("Taille de Board souhaiter (entier un entier impair):");
+                        int size;
+                        while ((size = int.Parse(Console.ReadLine())) % 2 != 1)
+                        {
+                            Console.WriteLine("Veuillez entrer un entier impair:");
+                        }
 
-            // IA turn                
-            algo.PlayOneAction(g);
-            /*
-            Thread.Sleep(3000); // simule la réflexion 
-            algo.PlayOneAction(g);
-            Thread.Sleep(3000);
-            algo.PlayOneAction(g);
-            */
-            g.Update(new EndTurn());
-                
-            g.Update(new MoveBall(0, 2, 2, 0));
-            g.Update(new MovePiece(0, 2, 1, 2));
-            g.Update(new MovePiece(0, 4, 1, 4));
 
-            Console.Write(g.ToString());
-            Thread.Sleep(100000);
+                        GameBuilder gb = new GameBuilder().SetPlayer0(nom1, color1).SetPlayer1(nom2, color2).SetBoard(size, strat);
+                        Game g = gb.Build();
+
+                        bool valid = true;
+                        while (valid)
+                        {
+                            Console.WriteLine(g.ToString());
+                            Console.WriteLine("Nombre de déplacement de pièce restant :" + (2 - g.MovePieceCount));
+                            Console.WriteLine("Nombre de déplacement de pièce restant :" + (1 - g.MoveBallCount));
+                            Console.WriteLine("Choississez votre action :");
+                            Console.WriteLine("1: move piece");
+                            Console.WriteLine("2: move ball");
+                            Console.WriteLine("3: end turn");
+                            Console.WriteLine("4: exit");
+                            string rep = Console.ReadLine();
+                            switch (rep)
+                            {
+                                case "1":
+                                    Console.WriteLine("which piece ? (x)");
+                                    string repx = Console.ReadLine();
+                                    Console.WriteLine("which piece ? (y)");
+                                    string repy = Console.ReadLine();
+                                    Console.WriteLine("where to ? (x)");
+                                    string wherex = Console.ReadLine();
+                                    Console.WriteLine("where to ? (y)");
+                                    string wherey = Console.ReadLine();
+                                    g.Update(new MovePiece(int.Parse(repx), int.Parse(repy), int.Parse(wherex), int.Parse(wherey)));
+                                    break;
+                                case "2":
+                                    Console.WriteLine("which piece ? (x)");
+                                    string pbx = Console.ReadLine();
+                                    Console.WriteLine("which piece ? (y)");
+                                    string pby = Console.ReadLine();
+                                    Console.WriteLine("where to ? (x)");
+                                    string nbx = Console.ReadLine();
+                                    Console.WriteLine("where to ? (y)");
+                                    string nby = Console.ReadLine();
+                                    g.Update(new MoveBall(int.Parse(pbx), int.Parse(pby), int.Parse(nbx), int.Parse(nby)));
+                                    break;
+                                case "3":
+                                    g.Update(new EndTurn());
+                                    break;
+                                case "4":
+                                    return;
+                            }
+                            if (g.IsWin())
+                            {
+                                valid = false;
+                                Console.WriteLine("Le jeu est fini. Le joueur victorieux est :");
+                                g.VictoriousPlayer.ToString();
+                            }
+                        }
+
+
+
+                        break;
+                    case "2": // Charger une partie
+                        string filename = "";
+                        GameSaveManager.Load(filename);
+                        break;
+                    case "3":
+                        break;
+                }
+            }
+
+            return;
         }
     }
 }

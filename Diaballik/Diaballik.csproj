@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\generation\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,7 +47,6 @@
     <Compile Include="Actions\EndTurn.cs" />
     <Compile Include="Actions\Interface1.cs" />
     <Compile Include="Engine\Board.cs" />
-    <Compile Include="Engine\GameVisualizer.cs" />
     <Compile Include="Engine\Builder\LoadGameBuilder.cs" />
     <Compile Include="Engine\Builder\GameBuilder.cs" />
     <Compile Include="Engine\GameSaveManager.cs" />

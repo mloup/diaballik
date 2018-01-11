@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diaballik", "Diaballik\Diaballik.csproj", "{3D2347F7-74E0-4BD2-BC82-6C8A99491153}"
+	ProjectSection(ProjectDependencies) = postProject
+		{81E670FE-8518-4C71-B28D-D3D6AC90C790} = {81E670FE-8518-4C71-B28D-D3D6AC90C790}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaballikTest", "DiaballikTest\DiaballikTest.csproj", "{291B7D66-247B-42E1-8A97-B24C7952183C}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -44,6 +47,7 @@ Global
 		{291B7D66-247B-42E1-8A97-B24C7952183C}.Release|x86.ActiveCfg = Release|Any CPU
 		{291B7D66-247B-42E1-8A97-B24C7952183C}.Release|x86.Build.0 = Release|Any CPU
 		{81E670FE-8518-4C71-B28D-D3D6AC90C790}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{81E670FE-8518-4C71-B28D-D3D6AC90C790}.Debug|Any CPU.Build.0 = Debug|Win32
 		{81E670FE-8518-4C71-B28D-D3D6AC90C790}.Debug|x86.ActiveCfg = Debug|Win32
 		{81E670FE-8518-4C71-B28D-D3D6AC90C790}.Debug|x86.Build.0 = Debug|Win32
 		{81E670FE-8518-4C71-B28D-D3D6AC90C790}.Release|Any CPU.ActiveCfg = Release|Win32
